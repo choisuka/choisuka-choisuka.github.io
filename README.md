@@ -29,3 +29,7 @@ https://choisuka.github.io/
 | 토로의 감정숲 | https://choisuka.github.io/toro/ | 30일 감정 동화 |
 | 과학 탐험대 | https://choisuka.github.io/science_game/ | 초등 과학 |
 | 아르모니아 수학왕국 | https://choisuka.github.io/toro_math/ | 중등 수학 개념 |
+
+## 개발 정보
+- 로컬 폴더: `C:/Users/USER/armoonia_hub`
+- GitHub 레포: `choisuka/armoonia_hub`
