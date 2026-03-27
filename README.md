@@ -14,8 +14,18 @@
 - 📝 오늘의 토로 일기
 - 💚 나눔 섹션
 
+---
+
+## 메인 허브
+
+https://choisuka.github.io/
+
 ## 관련 앱
 
-- 메인 허브: https://choisuka.github.io/
-- 아르모니아 수학왕국: https://choisuka.github.io/toro_math/
-- 유대인 수학: https://choisuka.github.io/jewish_math/
+| 앱 | 링크 | 설명 |
+|---|---|---|
+| 내사랑 | https://choisuka.github.io/naesarang/ | 부모 감정관리 |
+| 행복한 하루 | https://choisuka.github.io/Happy-day/ | 날씨·음악·문화 |
+| 토로의 감정숲 | https://choisuka.github.io/toro/ | 30일 감정 동화 |
+| 과학 탐험대 | https://choisuka.github.io/science_game/ | 초등 과학 |
+| 아르모니아 수학왕국 | https://choisuka.github.io/toro_math/ | 중등 수학 개념 |
