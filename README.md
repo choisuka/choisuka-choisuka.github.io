@@ -1,8 +1,8 @@
-# 우리아이행복앱
+# 우리아이행복프로젝트
 
 **아르모니아 프로젝트** — 수학·과학·감정·행복 무료 교육 앱 모음
 
-🌐 **라이브**: https://choisuka.github.io/armoonia_hub/
+🌐 **라이브**: https://choisuka.github.io/
 
 ---
 
@@ -32,4 +32,4 @@ https://choisuka.github.io/
 
 ## 개발 정보
 - 로컬 폴더: `C:/Users/USER/armoonia_hub`
-- GitHub 레포: `choisuka/armoonia_hub`
+- GitHub 레포: `choisuka/choisuka.github.io`
