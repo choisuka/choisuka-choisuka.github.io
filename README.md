@@ -32,4 +32,4 @@ https://choisuka.github.io/
 
 ## 개발 정보
 - 로컬 폴더: `C:/Users/USER/armoonia_hub`
-- GitHub 레포: `choisuka/armoonia_hub`
+- GitHub 레포: `choisuka/choisuka.github.io`
