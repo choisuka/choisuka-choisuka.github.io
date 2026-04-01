@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>창의력을 키우는 연령별 미술 활동 100</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e2e8f0;font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;line-height:1.7}
+header{background:linear-gradient(135deg,#0a1a2e,#1a2d4e);padding:40px 20px;text-align:center;border-bottom:1px solid rgba(99,179,237,.3)}
+header h1{font-size:1.8rem;color:#90cdf4;margin-bottom:8px}
+header p{color:rgba(255,255,255,.55);font-size:.92rem}
+.back-btn{display:inline-block;margin-top:16px;padding:.45rem 1.2rem;background:rgba(99,179,237,.15);border:1px solid rgba(99,179,237,.4);border-radius:999px;color:#90cdf4;text-decoration:none;font-size:.82rem}
+.tab-wrap{position:sticky;top:0;z-index:100;background:#0a0a1a;border-bottom:1px solid rgba(255,255,255,.08);display:flex;overflow-x:auto;gap:0}
+.tab{flex:1;min-width:120px;text-align:center;padding:14px 8px;font-size:.82rem;color:rgba(255,255,255,.45);cursor:pointer;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap}
+.tab.active{color:#90cdf4;border-bottom-color:#90cdf4}
+.section{display:none;max-width:900px;margin:0 auto;padding:32px 20px}
+.section.active{display:block}
+input[type=text]{width:100%;padding:10px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;color:#e2e8f0;font-size:.88rem;margin-bottom:20px}
+.activity{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;margin-bottom:12px;transition:.2s}
+.activity:hover{background:rgba(99,179,237,.07);border-color:rgba(99,179,237,.25)}
+.activity-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.num{min-width:32px;color:#6b7280;font-size:.78rem;padding-top:3px}
+.activity-title{font-size:.98rem;color:#e2e8f0;font-weight:700;flex:1}
+.badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.68rem;font-weight:700}
+.badge-indoor{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3)}
+.badge-outdoor{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.badge-solo{background:rgba(251,191,36,.15);color:#fcd34d;border:1px solid rgba(251,191,36,.3)}
+.badge-together{background:rgba(236,72,153,.15);color:#f9a8d4;border:1px solid rgba(236,72,153,.3)}
+.badge-easy{background:rgba(16,185,129,.15);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.badge-medium{background:rgba(251,191,36,.15);color:#fcd34d;border:1px solid rgba(251,191,36,.3)}
+.badge-hard{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.badge-season{background:rgba(125,211,252,.12);color:#7dd3fc;border:1px solid rgba(125,211,252,.3)}
+.desc-label{display:block;color:#90cdf4;font-weight:700;font-size:.76rem;margin-top:10px;margin-bottom:2px;letter-spacing:.02em}
+.activity p{margin:0;color:#64748b;font-size:.82rem;line-height:1.7}
+.btn-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.coupang-btn{display:inline-block;padding:5px 14px;background:rgba(231,76,60,.12);border:1px solid rgba(231,76,60,.35);border-radius:999px;color:#fca5a5;font-size:.75rem;font-weight:700;text-decoration:none}
+.coupang-btn:hover{background:rgba(231,76,60,.25);color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎨 창의력을 키우는 연령별 미술 활동 100</h1>
+  <p>0~2세 · 3~5세 · 6~8세 · 9세 이상 · 연령별 25가지 엄선</p>
+  <a class="back-btn" href="https://choisuka.github.io/">← 허브로 돌아가기</a>
+</header>
+
+<div class="tab-wrap">
+  <div class="tab active" onclick="showTab('age1')">👶 0~2세</div>
+  <div class="tab" onclick="showTab('age2')">🌱 3~5세</div>
+  <div class="tab" onclick="showTab('age3')">🎨 6~8세</div>
+  <div class="tab" onclick="showTab('age4')">✏️ 9세 이상</div>
+</div>
+
+<!-- 0~2세 -->
+<div class="section active" id="tab-age1">
+  <input type="text" placeholder="🔍 검색 (활동명, 준비물, 계절...)" oninput="filter(this,'age1')">
+
+  <div class="activity"><div class="activity-header"><span class="num">1</span><div class="activity-title">핑거페인팅
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-together">👨‍👩‍👧 함께</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">🌸 사계절</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>손가락에 물감을 묻혀 종이에 자유롭게 찍고 그립니다. 아기가 처음으로 색을 탐색하는 감각 미술의 출발점입니다. 결과보다 과정이 중요한 활동으로, 아기가 물감의 감촉을 온몸으로 경험합니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>영유아용 무독성 핑거페인트, 전지 또는 큰 종이, 방수 앞치마, 비닐 매트</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>15~20분 (정리 포함 30분)</p>
+  <span class="desc-label">💡 팁</span>
+  <p>욕실에서 하면 정리가 훨씬 편합니다. 물감을 먹어도 안전한 영유아 전용 제품을 반드시 사용하세요. 처음엔 한 가지 색만 주고 점차 늘려가세요.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=영유아+핑거페인트" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">2</span><div class="activity-title">물감 발도장
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-together">👨‍👩‍👧 함께</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">🌸 사계절</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>아기 발바닥에 물감을 바르고 종이에 찍어 발자국을 남깁니다. 나중에 액자로 만들면 성장 기록이 됩니다. 손도장과 함께 찍으면 나무, 꽃 등 다양한 모양을 만들 수 있습니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>무독성 물감, 넓은 붓 또는 스펀지, 두꺼운 종이 또는 캔버스, 따뜻한 물수건</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>10~15분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>물감을 발에 바를 때 간지러워 발을 빼는 아기가 많습니다. 미리 발을 살짝 간질여 적응시켜 주세요. 도장을 찍은 후 날짜와 발 크기를 적어두면 소중한 성장 기록이 됩니다.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=아기+손발+도장+물감" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">3</span><div class="activity-title">크레용 긁기
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-solo">👤 혼자</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">🌸 사계절</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>두꺼운 크레용을 쥐고 종이에 자유롭게 선을 긋습니다. 아기의 소근육 발달과 눈-손 협응력을 키워주는 가장 기초적인 미술 활동입니다. 색이 남는 것을 보며 인과관계를 처음 경험합니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>영아용 두꺼운 크레용(삼각 또는 계란형), 스케치북</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>10~15분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>영아용 삼각 크레용이 손에 쥐기 좋고 굴러가지 않아 적합합니다. 아기가 크레용을 입에 넣을 수 있으니 무독성 제품을 사용하고 항상 옆에서 지켜봐 주세요.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=영아용+삼각+크레용" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">4</span><div class="activity-title">스티커 붙이기
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-solo">👤 혼자</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">🌸 사계절</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>스티커를 떼어 종이에 붙이는 단순한 활동이지만 소근육 발달에 탁월한 효과가 있습니다. 동그라미, 별, 하트 등 다양한 모양 스티커로 그림을 완성합니다. 색깔 인식과 공간 배치 감각도 함께 키울 수 있습니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>대형 도형 스티커, 스케치북 또는 도화지</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>10~20분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>처음엔 스티커가 큰 것부터 시작하세요. "빨간 동그라미 어디 붙일까?" 하고 말을 걸어주면 언어 발달도 함께 됩니다. 스티커를 옷에 붙이기 시작하면 자연스럽게 종이로 유도해 주세요.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=아기+스티커+도형" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">5</span><div class="activity-title">티슈 구기기·찢기
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-solo">👤 혼자</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">🌸 사계절</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>색깔 티슈나 한지를 구기고 찢어 풀로 종이에 붙입니다. 구기는 촉감과 찢기는 소리가 감각 자극에 좋습니다. 완성된 작품은 꽃이나 구름 모양이 되기도 합니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>색깔 티슈 또는 한지, 딱풀, 도화지</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>15~20분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>티슈를 구기는 소리를 "바스락~" 하고 함께 소리 내면 아기가 더 좋아합니다. 작게 찢은 조각들을 하늘에 뿌려보는 것도 신나는 감각 놀이가 됩니다.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=색깔+한지+색티슈" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">6</span><div class="activity-title">모래 감각 놀이
+    <div class="badges"><span class="badge badge-outdoor">🌿 실외</span><span class="badge badge-together">👨‍👩‍👧 함께</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">☀️ 봄·여름·가을</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>모래 위에 손가락이나 나뭇가지로 선을 긋고 모양을 만듭니다. 틀로 찍어내고 색모래로 그림을 완성하는 자연 미술 활동입니다. 모래의 질감이 두뇌 감각 발달에 매우 좋습니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>모래놀이 도구 세트, 색모래(선택), 분무기(모래 적시기용)</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>20~40분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>색모래를 여러 색 준비해두면 모래 그림을 만들 수 있습니다. 실내에서 하려면 대형 트레이에 모래를 담아 사용하세요. 놀이 후 손을 꼼꼼히 씻겨주세요.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=색모래+모래놀이+세트" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">7</span><div class="activity-title">물놀이 색소 그림
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-together">👨‍👩‍👧 함께</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">☀️ 여름</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>대야에 물을 담고 식용 색소 몇 방울을 떨어뜨립니다. 아기가 손을 넣어 색물을 휘젓고 종이를 담갔다 꺼내면 아름다운 그림이 완성됩니다. 물의 촉감과 색의 변화를 동시에 경험합니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>식용 색소, 대야, 흰 종이 또는 커피 필터, 앞치마</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>20~30분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>반드시 식용 색소를 사용하세요. 욕실에서 하면 정리가 편하고 아기가 물을 먹어도 안전합니다. 여러 색을 섞으면 색이 변하는 것을 보며 색 혼합을 자연스럽게 배웁니다.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=식용+색소+세트" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">8</span><div class="activity-title">아이스 물감 그림
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-together">👨‍👩‍👧 함께</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">☀️ 여름</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>물감을 탄 물을 얼음 틀에 얼려 색깔 얼음을 만듭니다. 아기가 색깔 얼음을 쥐고 종이 위에 문지르면 그림이 그려집니다. 차가운 감촉과 얼음이 녹으며 색이 번지는 신기한 경험을 합니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>얼음 틀, 무독성 물감, 아이스크림 막대, 두꺼운 도화지</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>준비(전날 얼리기) + 활동 20분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>얼음 틀에 막대를 꽂아 손잡이처럼 만들면 아기가 쥐기 편합니다. 여름에 바깥에서 하면 더위도 식히고 미술도 즐길 수 있습니다. 여러 색 얼음을 같이 문지르면 색이 섞이는 것을 볼 수 있습니다.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=아기+아이스크림+얼음틀" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">9</span><div class="activity-title">솜뭉치 찍기
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-together">👨‍👩‍👧 함께</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">🌸 사계절</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>솜뭉치나 화장 솜을 집게로 집어 물감에 찍은 뒤 종이에 콕콕 찍습니다. 집게를 쥐는 동작이 소근육 발달에 좋고, 솜의 부드러운 질감이 촉각 자극이 됩니다. 벚꽃, 눈송이 등 다양한 표현이 가능합니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>화장 솜 또는 솜뭉치, 빨래집게, 물감, 팔레트, 도화지</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>15~20분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>집게를 쥐는 것이 어려운 아기라면 손으로 잡아도 됩니다. 분홍 물감으로 찍으면 벚꽃, 흰 물감으로 찍으면 눈이 됩니다. 계절에 맞는 배경 그림 위에 찍어보세요.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=화장솜+미술+도구" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+  <div class="activity"><div class="activity-header"><span class="num">10</span><div class="activity-title">스펀지 물감 찍기
+    <div class="badges"><span class="badge badge-indoor">🏠 실내</span><span class="badge badge-together">👨‍👩‍👧 함께</span><span class="badge badge-easy">⭐ 쉬움</span><span class="badge badge-season">🌸 사계절</span></div>
+  </div></div>
+  <span class="desc-label">📋 활동 설명</span>
+  <p>스펀지에 물감을 묻혀 종이에 찍으면 독특한 질감의 그림이 완성됩니다. 스펀지를 쥐어짜는 동작이 손 근육 발달에 좋고, 물감이 번지는 효과가 아이의 눈을 즐겁게 합니다. 별, 하트 등 모양으로 잘라 스탬프처럼 활용할 수도 있습니다.</p>
+  <span class="desc-label">🛒 준비물</span>
+  <p>다양한 크기의 스펀지, 물감, 팔레트, 도화지</p>
+  <span class="desc-label">⏱️ 소요 시간</span>
+  <p>15~20분</p>
+  <span class="desc-label">💡 팁</span>
+  <p>스펀지를 가위로 별, 하트, 동물 모양으로 잘라두면 더 재미있습니다. 스펀지에 물감을 너무 많이 묻히면 번지므로 팔레트에서 한 번 눌러 조절해 주세요.</p>
+  <div class="btn-row"><a class="coupang-btn" href="https://www.coupang.com/np/search?q=미술용+스펀지+도장" target="_blank">🛒 쿠팡에서 준비물 보기</a></div>
+  </div>
+
+</div>
+
+<!-- 3~5세 -->
+<div class="section" id="tab-age2">
+  <input type="text" placeholder="🔍 검색 (활동명, 준비물, 계절...)" oninput="filter(this,'age2')">
+  <p style="color:#94a3b8;text-align:center;padding:40px 0">🚧 준비 중입니다</p>
+</div>
+
+<!-- 6~8세 -->
+<div class="section" id="tab-age3">
+  <input type="text" placeholder="🔍 검색 (활동명, 준비물, 계절...)" oninput="filter(this,'age3')">
+  <p style="color:#94a3b8;text-align:center;padding:40px 0">🚧 준비 중입니다</p>
+</div>
+
+<!-- 9세 이상 -->
+<div class="section" id="tab-age4">
+  <input type="text" placeholder="🔍 검색 (활동명, 준비물, 계절...)" oninput="filter(this,'age4')">
+  <p style="color:#94a3b8;text-align:center;padding:40px 0">🚧 준비 중입니다</p>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+function filter(input, sectionId) {
+  const q = input.value.toLowerCase();
+  document.querySelectorAll('#tab-' + sectionId + ' .activity').forEach(item => {
+    item.style.display = item.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
