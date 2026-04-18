@@ -35,6 +35,7 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
 .fmt-h{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.25)}
 .fmt-a{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.25)}
 .fmt-m{background:rgba(96,165,250,.15);color:#60a5fa;border:1px solid rgba(96,165,250,.25)}
+.fmt-g{background:rgba(251,113,133,.15);color:#fb7185;border:1px solid rgba(251,113,133,.25)}
 
 /* ── 주제 화면 ── */
 #topic{display:none;padding:0 0 40px}
@@ -50,6 +51,7 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
 .fmt-tab.active-h{background:rgba(251,191,36,.15);color:#fbbf24}
 .fmt-tab.active-a{background:rgba(52,211,153,.15);color:#34d399}
 .fmt-tab.active-m{background:rgba(96,165,250,.15);color:#60a5fa}
+.fmt-tab.active-g{background:rgba(251,113,133,.15);color:#fb7185}
 .fmt-tab-icon{font-size:1rem;display:block;margin-bottom:2px}
 
 /* 카드 영역 */
@@ -82,6 +84,12 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
 .theme-h .card-front{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.04)}
 .theme-a .card-front{border-color:rgba(52,211,153,.25);background:rgba(52,211,153,.04)}
 .theme-m .card-front{border-color:rgba(96,165,250,.25);background:rgba(96,165,250,.04)}
+.theme-g .card-front{border-color:rgba(251,113,133,.25);background:rgba(251,113,133,.04)}
+/* 가이드 전용 스타일 */
+.card-body .guide-step{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;margin:10px 0}
+.card-body .guide-step h4{font-size:.82rem;color:#fb7185;margin-bottom:6px;font-weight:700}
+.card-body .tip-box{background:rgba(251,113,133,.08);border-left:3px solid #fb7185;padding:8px 12px;border-radius:0 8px 8px 0;margin:10px 0;font-size:.78rem}
+.card-body .answer-box{background:rgba(52,211,153,.08);border-left:3px solid #34d399;padding:8px 12px;border-radius:0 8px 8px 0;margin:10px 0}
 
 /* 반응형 */
 @media(max-width:360px){
@@ -103,6 +111,7 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
     <div class="legend-item"><div class="legend-dot" style="background:#fbbf24"></div>🏛️ 하크니스 원탁</div>
     <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>🏛️ 아고라 광장</div>
     <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div>🔬 미네르바 세미나</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fb7185"></div>🍎 수업 가이드</div>
   </div>
 
   <div class="day-list" id="day-list"></div>
@@ -127,6 +136,9 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
     </button>
     <button class="fmt-tab" id="tab-m" onclick="selectFormat('m')">
       <span class="fmt-tab-icon">🔬</span>미네르바
+    </button>
+    <button class="fmt-tab" id="tab-g" onclick="selectFormat('g')">
+      <span class="fmt-tab-icon">🍎</span>수업가이드
     </button>
   </div>
 
@@ -336,6 +348,129 @@ const TOPICS = [
       }
     }
   }
+      ,
+      g: {
+        tag: '🍎 수업 가이드',
+        body: `<div class="question">수업 지도안 · 토론 시나리오 — 원장님이 그대로 읽거나 화면에 띄워주셔도 충분히 깊이 있는 수업이 가능합니다</div>
+
+<div class="guide-step">
+<h4>🕐 1. 도입: 생각 열기 (5분)</h4>
+<p><strong>(교사 질문)</strong> "여러분, 우리는 초등학교 때 '자연수'를 배웠어요. 그런데 왜 중학교에 오니 '음수(−)'와 '0'이 포함된 정수를 배워야 할까요? 만약 세상에 음수가 없다면 어떤 일이 벌어질까요?"</p>
+<p>학생들의 예상 답변: "빚을 표현 못 해요", "영하의 기온을 말 못 해요."</p>
+<p><strong>교사의 정리:</strong> "맞아요. 음수는 단순히 '작은 수'가 아니라, 기준(0)으로부터 <strong>'반대 방향'</strong>이라는 개념을 수학에 도입한 혁명적인 사건이에요."</p>
+</div>
+
+<div class="guide-step">
+<h4>🕐 2. 전개: 유리수의 정의와 논리 (20분)</h4>
+<p><strong>(1) 유리수(Rational Number)의 진짜 의미</strong><br>
+많은 학생이 유리수를 단순히 '분수'라고만 압니다. 하지만 그 어원을 짚어주면 수준이 달라집니다.</p>
+<p>설명: 유리수의 영어 표현 'Rational'은 '이성적'이라는 뜻도 있지만, 수학에서는 <strong>'Ratio(비)'</strong>에서 왔습니다.</p>
+<p>정의: 즉, 유리수는 <strong>"두 정수의 비(a/b 형태, b≠0)로 나타낼 수 있는 수"</strong>를 말합니다.</p>
+<p><strong>(2) '밀집성(Density)' 실험</strong><br>
+아이들에게 생각할 거리를 던지세요.</p>
+<ul>
+<li>질문: "0.1과 0.2 사이에 유리수가 몇 개나 있을까?"</li>
+<li>유도: 0.11, 0.111, 0.1111... 끝없이 만들 수 있죠?</li>
+<li>결론: "유리수는 수직선 위에서 아주 빽빽하게(Dense) 존재해. 아무리 좁은 틈이라도 그 사이엔 또 다른 유리수가 있지."</li>
+</ul>
+</div>
+
+<div class="guide-step">
+<h4>🕐 3. 하크니스 토론 (Harkness Discussion) (15분)</h4>
+<p><strong>주제: 0.999…은 정말로 1인가?</strong></p>
+<p>이 질문은 미국 사립학교 수학 수업의 단골 소재입니다. 아이들이 서로 논쟁하게 두세요.</p>
+<ul>
+<li><strong>논리 A (유리수적 접근):</strong> 1/3 = 0.333… 이다. 양변에 3을 곱하면 3/3 = 0.999… 이 된다. 그런데 3/3은 1이다. 따라서 0.999… = 1이다.</li>
+<li><strong>논리 B (직관적 접근):</strong> "아무리 9가 많아도 1보다는 아주 조금이라도 작지 않을까요?"</li>
+</ul>
+<p><strong>교사의 개입:</strong> "유리수의 정의에 따르면, 두 수 사이에 다른 유리수가 존재하지 않는다면 그 두 수는 같은 수야. 0.999…와 1 사이에 다른 숫자를 넣을 수 있니?"</p>
+</div>
+
+<div class="guide-step">
+<h4>🕐 4. 실전 문제 및 마무리 (5분)</h4>
+<p><strong>[오늘의 도전 과제]</strong> 다음 중 유리수가 아닌 것을 고르고 이유를 설명하세요.</p>
+<ol style="padding-left:18px">
+<li>−5 (정수니까 유리수인가?)</li>
+<li>0 (분수로 나타낼 수 있나?)</li>
+<li>0.333… (끝이 없는데 유리수인가?)</li>
+<li>π (3.141592… 이 수는 분수로 나타낼 수 있을까?)</li>
+</ol>
+</div>`,
+        ans: `<h3>🍎 수업 가이드 — 정답 및 교사 팁</h3>
+
+<div class="answer-box">
+<strong>[정답 가이드]</strong><br>
+1, 2, 3은 모두 유리수입니다. (−5 = −5/1, 0 = 0/1, 0.333… = 1/3)<br>
+하지만 <strong>π</strong>는 아무리 노력해도 정수/정수 꼴로 만들 수 없으므로 유리수가 아닙니다.<br>
+(이것이 다음 날 배울 내용의 복선이 됩니다.)
+</div>
+
+<h3>🗣️ 하크니스 토론 실전 시나리오: "유리수는 완벽한가?"</h3>
+
+<div class="highlight">칠판에는 딱 한 문장만 적혀 있습니다:<br>
+<strong>"수직선 위의 모든 점은 유리수로 나타낼 수 있는가?"</strong><br>
+학생 10명이 원탁에 둘러앉아 대화를 시작합니다.</div>
+
+<div class="guide-step">
+<h4>학생 A (발제자)</h4>
+"난 그렇다고 봐. 아까 우리가 배운 '밀집성(Density)' 때문이야. 어떤 두 유리수 사이를 아무리 현미경으로 확대해도 그 안엔 또 다른 유리수가 있잖아? 0.1과 0.11 사이에도 무수히 많은 분수가 있으니까, 결국 수직선은 유리수로 꽉 차 있는 거 아닐까?"
+</div>
+
+<div class="guide-step">
+<h4>학생 B (반론)</h4>
+"A의 말도 일리가 있지만, '무수히 많다'는 게 '빈틈이 없다'는 뜻은 아니라고 생각해. 예를 들어, 피타고라스 정리를 써서 한 변이 1인 직사각형의 대각선 길이를 구하면 √2가 나오잖아. 이 길이는 분명히 수직선 위에 존재하는데, 이걸 정수 분의 정수(a/b) 꼴로 나타낼 수 있어? 난 없다고 들었어."
+</div>
+
+<div class="guide-step">
+<h4>학생 C (보완)</h4>
+"B의 말이 맞아. 만약 √2가 유리수가 아니라면, 수직선에는 유리수가 '채우지 못한 구멍'이 있다는 뜻이 돼. 유리수는 아주 촘촘하긴 하지만, 연속적(Continuous)이지는 않은 거지. 마치 체에 걸러진 가루처럼 말이야."
+</div>
+
+<div class="guide-step">
+<h4>학생 D (심화 질문)</h4>
+"잠깐, 그럼 우리가 아까 논쟁한 0.999… = 1 문제는 어떻게 돼? 0.999…는 유리수야? 만약 유리수라면, 1과의 사이에 '빈틈'이 없으니까 두 수는 같은 점이어야 해. 하지만 유리수가 아닌 무언가가 그 사이에 끼어들 여지가 있다면?"
+</div>
+
+<div class="guide-step">
+<h4>교사 (중재 — 여기서 처음 개입)</h4>
+"흥미로운 지점이야. D의 질문을 이어가 보자. 만약 수직선에 유리수만 살고 있다면, 우리는 '원(Circle)의 둘레'를 정확히 수직선 위에 표시할 수 있을까? 원주율 π는 어떻게 설명할래?"
+</div>
+
+<div class="guide-step">
+<h4>학생 E (결론 도출)</h4>
+"결국 유리수는 세상의 모든 길이를 설명하기엔 '부족한' 수 체계인 것 같아. 수직선을 완전히 메우기 위해서는 유리수 사이사이에 있는 '무리수'라는 접착제가 필요한 거지. 그래서 우리가 이걸 합쳐서 '실수(Real Number)'라고 부르는 게 아닐까?"
+</div>
+
+<h3>📝 원장님이 이 토론을 수업에 적용하는 법</h3>
+
+<div class="tip-box">
+<strong>① "Devil's Advocate" (악마의 대변인) 역할</strong><br>
+아이들이 너무 쉽게 "맞아요"라고 하면, 반대 사례를 던지세요.<br>
+원장님: "하지만 유리수는 무한히 많잖아? 무한히 많은데 어떻게 빈틈이 있을 수 있지? 이상하지 않아?"
+</div>
+
+<div class="tip-box">
+<strong>② 하크니스 테이블(Harkness Table) 기록</strong><br>
+토론하는 동안 누가 누구에게 질문했는지, 누가 대화를 주도했는지 선으로 연결하며 기록하세요. 수업 후 이 '대화 지도'를 보여주면 아이들은 자신의 참여도를 객관적으로 보게 됩니다.
+</div>
+
+<div class="tip-box">
+<strong>③ "So What?" (그래서 뭐?) 던지기</strong><br>
+토론이 끝날 때쯤 이 지식이 왜 중요한지 연결해 줍니다.<br>
+원장님: "결국 오늘 토론의 핵심은 이거야. 수학은 눈에 보이는 현상을 더 정밀하게 설명하기 위해 끊임없이 '수 체계'를 확장해온 역사라는 것. 유리수의 한계를 깨달은 여러분은 이제 고등 수학으로 갈 준비가 된 거야."
+</div>
+
+<h3>💡 실제 수업에서 아이들에게 줄 "토론 수칙" (미국 사립학교 예시)</h3>
+<ul>
+<li>발언하기 전에 반드시 앞사람의 의견을 요약하거나 언급할 것. (예: "B가 말한 √2 사례를 듣고 생각난 건데…")</li>
+<li>답을 맞히는 것이 목표가 아니라, <strong>'우리 모두의 이해도를 높이는 것'</strong>이 목표임을 명심할 것.</li>
+<li>교사를 보지 말고 친구의 눈을 보고 말할 것.</li>
+</ul>
+
+<div class="tip-box">이 시나리오를 참고해서 아이들에게 <strong>"오늘은 내가 답을 안 가르쳐줄 거야. 너희들끼리 수직선의 빈틈을 찾아봐"</strong>라고 던져보세요. 원장님의 권위가 아닌, 아이들의 호기심이 수업을 이끌게 될 것입니다.</div>`
+      }
+    }
+  }
   // Day 2~20은 순차 추가
 ];
 
@@ -358,6 +493,7 @@ function renderHome() {
         <span class="fmt-badge fmt-h">🏛️ 하크니스</span>
         <span class="fmt-badge fmt-a">🏛️ 아고라</span>
         <span class="fmt-badge fmt-m">🔬 미네르바</span>
+        <span class="fmt-badge fmt-g">🍎 가이드</span>
       </div>
     </div>
   `).join('');
@@ -386,7 +522,7 @@ function selectFormat(fmt) {
   isFlipped = false;
 
   // 탭 활성화
-  ['h','a','m'].forEach(f => {
+  ['h','a','m','g'].forEach(f => {
     const tab = document.getElementById(`tab-${f}`);
     tab.className = 'fmt-tab';
     if (f === fmt) tab.classList.add(`active-${f}`);
@@ -416,7 +552,8 @@ function tagStyle(fmt) {
   const styles = {
     h: 'background:rgba(251,191,36,.2);color:#fbbf24;border:1px solid rgba(251,191,36,.4)',
     a: 'background:rgba(52,211,153,.2);color:#34d399;border:1px solid rgba(52,211,153,.4)',
-    m: 'background:rgba(96,165,250,.2);color:#60a5fa;border:1px solid rgba(96,165,250,.4)'
+    m: 'background:rgba(96,165,250,.2);color:#60a5fa;border:1px solid rgba(96,165,250,.4)',
+    g: 'background:rgba(251,113,133,.2);color:#fb7185;border:1px solid rgba(251,113,133,.4)'
   };
   return styles[fmt];
 }
