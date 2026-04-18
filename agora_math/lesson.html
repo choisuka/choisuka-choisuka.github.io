@@ -94,7 +94,7 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
 
 <div class="day-nav">
   <button class="day-btn active" onclick="showDay(1)">Day 1</button>
-  <button class="day-btn locked">Day 2</button>
+  <button class="day-btn" onclick="showDay(2)">Day 2</button>
   <button class="day-btn locked">Day 3</button>
   <button class="day-btn locked">Day 4</button>
   <button class="day-btn locked">Day 5</button>
@@ -337,6 +337,33 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
   </div>
 
 
+  <!-- ── Day 1 학생 배포용 요약 노트 ── -->
+  <div class="section" style="margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)">
+    <div class="section-label">📗 Day 1 · 학생 배포용 &amp; 수업 요약 노트</div>
+    <div class="section-title">정수와 유리수 — "수직선의 빈틈을 찾아서"</div>
+
+    <div class="hook-box" style="margin-bottom:16px;text-align:left">
+      <strong>1. 오늘의 도전 (PBL)</strong><br>
+      <span style="font-size:.85rem;font-weight:400;color:#fbbf24">질문: $0.999...$와 1 사이에는 숫자가 존재할까? 만약 존재하지 않는다면, 두 수는 같은 수일까 다른 수일까?</span>
+    </div>
+
+    <div class="concept-card" style="margin-bottom:10px">
+      <div class="concept-title">2. 핵심 개념 (Core Concept)</div>
+      <div class="concept-body">
+        <strong>유리수(Q):</strong> 'Ratio(비)'가 가능한 수. 즉, 정수/정수 꼴로 나타낼 수 있는 수.<br><br>
+        <strong>밀집성(Density):</strong> 어떤 두 유리수 사이에도 무수히 많은 유리수가 존재한다.
+      </div>
+    </div>
+
+    <div class="concept-card">
+      <div class="concept-title">3. 하크네스 토론 (Harkness Discussion)</div>
+      <div class="concept-body">
+        <strong>주제:</strong> "수직선은 유리수만으로 완전히 채워질까?"<br><br>
+        <strong>생각해보기:</strong> 한 변의 길이가 1인 정사각형의 대각선 길이를 수직선에 옮기면, 그 지점은 유리수로 이름 붙일 수 있을까?
+      </div>
+    </div>
+  </div>
+
   <!-- ── Day 2 미리보기 ── -->
   <div class="section" style="margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)">
     <div class="section-label">🚀 내일 예고: Day 2 미리보기</div>
@@ -423,17 +450,148 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
     </table>
   </div>
 
-</div><!-- /content -->
+</div><!-- /day1-content -->
+
+<!-- ══ DAY 2 ══ -->
+<div class="content" id="day2-content" style="display:none">
+
+  <div class="lesson-header">
+    <div class="lesson-week">📅 1주차 · 수의 체계와 논리적 사고</div>
+    <div class="lesson-day">Day 2: 비율과 백분율 — 세상을 비교하는 기준</div>
+    <div class="lesson-topic">Topic: Ratios, Rates &amp; Percents — "상대적 크기의 마법"</div>
+    <div class="lesson-time">45~60분</div>
+  </div>
+
+  <!-- 1. 도입 -->
+  <div class="section">
+    <div class="section-label">1 · The Opening Task</div>
+    <div class="section-title">도입: 생각 열기 (PBL 질문)</div>
+    <div class="hook-box">
+      "여러분, A 백화점은 모든 품목 30% 할인이고, B 백화점은 20% 할인한 뒤에 계산대에서 추가로 10%를 더 깎아준대요. 두 백화점의 할인 혜택은 같을까요?"
+    </div>
+    <div class="concept-card" style="margin-top:14px">
+      <div class="concept-title">아이들의 반응</div>
+      <div class="concept-body">
+        <span style="color:rgba(255,255,255,.5);font-style:italic">"똑같이 30% 아니에요?", "아니요, 뭔가 다를 것 같아요!"</span><br><br>
+        <strong>해설:</strong> 실제 계산(100×0.8×0.9=72)을 통해 추가 할인이 28% 할인임을 보여주며, <strong>'기준값의 변화'</strong>가 왜 중요한지 일깨워줍니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 핵심 개념 -->
+  <div class="section">
+    <div class="section-label">2 · Core Concepts</div>
+    <div class="section-title">핵심 개념: 비율과 백분율의 엄밀한 정의</div>
+
+    <div class="concept-card" style="margin-bottom:10px">
+      <div class="concept-title">Ratio(비)</div>
+      <div class="concept-body">두 양의 크기를 비교하는 것. (a:b)</div>
+    </div>
+    <div class="concept-card" style="margin-bottom:10px">
+      <div class="concept-title">Rate(율)</div>
+      <div class="concept-body">서로 다른 단위의 비. (예: 속력 — km/h)</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-title">Percent(백분율)</div>
+      <div class="concept-body">기준(분모)을 100으로 고정한 비.</div>
+    </div>
+  </div>
+
+  <!-- 3. 실생활 연결 -->
+  <div class="section">
+    <div class="section-label">3 · Real-world Connection</div>
+    <div class="section-title">실생활 연결: 금융과 건축</div>
+
+    <div class="concept-card" style="margin-bottom:10px">
+      <div class="concept-title">금융(이자율)</div>
+      <div class="concept-body">복리(Compound Interest)의 무서움. "이자에 이자가 붙을 때 기준값은 어떻게 변하는가?"</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-title">건축(축척)</div>
+      <div class="concept-body">설계도의 1:100 비율이 실제 건물이 되었을 때, '면적'과 '부피'는 몇 배가 되는가? (길이가 100배면 면적은 100²배가 된다는 논리적 추론)</div>
+    </div>
+  </div>
+
+  <!-- 4. 하크니스 토론 시나리오 -->
+  <div class="section" style="margin-top:36px">
+    <div class="section-label">🗣️ 하크네스 토론 시나리오 (실제 미국 사립학교 수준)</div>
+
+    <div class="scenario-box">
+      <div class="scenario-speaker">학생 A</div>
+      <div class="scenario-line">"비율은 단순한 분수랑 달라요. 분수는 전체 중의 일부(Part−to−Whole)를 말하지만, 비는 부분과 부분(Part−to−Part)을 비교할 수도 있잖아요?"</div>
+    </div>
+    <div class="scenario-box">
+      <div class="scenario-speaker">학생 B</div>
+      <div class="scenario-line">"맞아. 예를 들어 남녀 비율이 3:2인 건 분수로 3/2라고 쓸 수 있지만, 그게 '전체의 3/5'를 의미하진 않지."</div>
+    </div>
+    <div class="scenario-box">
+      <div class="scenario-speaker">학생 C</div>
+      <div class="scenario-line">"그럼 백분율은 왜 쓰는 걸까? 그냥 분수로 쓰면 안 돼?"</div>
+    </div>
+    <div class="scenario-box">
+      <div class="scenario-speaker">학생 D</div>
+      <div class="scenario-line">"기준이 다르면 비교가 안 되니까! 75점 맞은 애랑 80점 맞은 애를 비교할 때, 만점이 각각 80점, 100점이라면 백분율로 바꿔야 누가 더 잘했는지 보이지."</div>
+    </div>
+  </div>
+
+  <!-- 5. Day 2 운영 팁 -->
+  <div class="tip-section">
+    <div class="section-label" style="margin-bottom:16px">💡 원장님을 위한 Day 2 수업 운영 팁</div>
+
+    <div class="tip-item">
+      <div class="tip-num">① 계산기 활용</div>
+      <div class="tip-body">미국 사립학교는 단순 산수보다 '논리'를 중시하므로, 복잡한 퍼센트 계산은 계산기를 쓰게 하셔도 좋습니다. 중요한 건 <strong>"어떤 식을 세워야 하는가"</strong>입니다.</div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-num">② 뉴스 기사 활용</div>
+      <div class="tip-body">인플레이션 5% 상승, 시청률 10%p 하락 같은 실제 기사를 가져와서 '퍼센트'와 '퍼센트포인트'의 차이를 토론하게 해보세요. 아이들이 수학을 '살아있는 도구'로 느끼게 됩니다.</div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-num">③ 마무리 퀴즈</div>
+      <div class="tip-q">"설탕물 10%와 20%를 섞으면 왜 15%가 되지 않을까? (양이 다를 때)"</div>
+    </div>
+  </div>
+
+  <!-- 마무리 -->
+  <div class="section" style="margin-top:28px;padding:16px;background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.15);border-radius:12px">
+    <div class="concept-body">Day 1은 수의 논리를, Day 2는 그 수들을 비교하는 기술을 배우게 됩니다.<br><br>
+    혹시 특정 학교(예: 필립스 엑서터의 실제 문제집 스타일)의 문항이 더 필요하시면 언제든 말씀해 주세요! 내일 Day 3: 지수 법칙으로 넘어갈 준비가 되면 알려주세요.</div>
+  </div>
+
+</div><!-- /day2-content -->
 
 <div class="bottom-nav">
   <a href="index.html" class="nav-btn">📋 카드 포맷</a>
-  <span style="font-size:.72rem;color:rgba(255,255,255,.3);align-self:center">Day 1 / 20</span>
-  <a href="#" class="nav-btn primary">Day 2 →</a>
+  <span id="day-indicator" style="font-size:.72rem;color:rgba(255,255,255,.3);align-self:center">Day 1 / 20</span>
+  <button id="next-day-btn" onclick="showDay(currentDay+1)" class="nav-btn primary" style="border:none;cursor:pointer">Day 2 →</button>
 </div>
 
 <script>
+var currentDay = 1;
 function showDay(n) {
-  // 추후 Day 2~20 추가 시 전환
+  if (n < 1 || n > 20) return;
+  // 콘텐츠 전환
+  document.querySelectorAll('.content').forEach(function(el){ el.style.display='none'; });
+  var target = document.getElementById('day'+n+'-content');
+  if (target) target.style.display='block';
+  // 버튼 활성화
+  document.querySelectorAll('.day-btn').forEach(function(btn, i){
+    btn.classList.toggle('active', i+1 === n);
+  });
+  // 인디케이터
+  document.getElementById('day-indicator').textContent = 'Day '+n+' / 20';
+  // 다음 버튼
+  var nb = document.getElementById('next-day-btn');
+  if (n < 20 && document.getElementById('day'+(n+1)+'-content')) {
+    nb.style.display='block';
+    nb.textContent = 'Day '+(n+1)+' →';
+  } else {
+    nb.style.display='none';
+  }
+  currentDay = n;
+  window.scrollTo(0,0);
 }
 </script>
 </body>
