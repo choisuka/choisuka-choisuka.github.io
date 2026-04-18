@@ -52,7 +52,14 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
 .fmt-tab.active-a{background:rgba(52,211,153,.15);color:#34d399}
 .fmt-tab.active-m{background:rgba(96,165,250,.15);color:#60a5fa}
 .fmt-tab.active-g{background:rgba(251,113,133,.15);color:#fb7185}
+.fmt-tab.active-e{background:rgba(239,68,68,.2);color:#f87171}
 .fmt-tab-icon{font-size:1rem;display:block;margin-bottom:2px}
+
+/* 교실 순간 — 긴급 참조 카드 */
+.emergency-card{background:rgba(15,5,5,.95);border:1px solid rgba(239,68,68,.3);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.em-row{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.03);border-radius:10px;padding:12px 14px;border-left:3px solid}
+.em-trigger{font-size:.75rem;font-weight:800;min-width:52px;letter-spacing:-.3px;margin-top:1px}
+.em-action{font-size:.85rem;line-height:1.5;color:rgba(255,255,255,.9);font-weight:500}
 
 /* 카드 영역 */
 .card-area{padding:16px}
@@ -112,6 +119,7 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
     <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>🏛️ 아고라 광장</div>
     <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div>🔬 미네르바 세미나</div>
     <div class="legend-item"><div class="legend-dot" style="background:#fb7185"></div>🍎 수업 가이드</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div>🚨 교실 순간</div>
   </div>
 
   <div class="day-list" id="day-list"></div>
@@ -140,6 +148,9 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
     <button class="fmt-tab" id="tab-g" onclick="selectFormat('g')">
       <span class="fmt-tab-icon">🍎</span>수업가이드
     </button>
+    <button class="fmt-tab" id="tab-e" onclick="selectFormat('e')">
+      <span class="fmt-tab-icon">🚨</span>교실순간
+    </button>
   </div>
 
   <div class="card-area">
@@ -149,7 +160,7 @@ body{background:#0f0f1a;color:#e8e8f0;font-family:'Segoe UI',sans-serif;min-heig
         <div class="card-face card-back" id="card-back"></div>
       </div>
     </div>
-    <div class="flip-area">
+    <div class="flip-area" id="flip-area">
       <button class="flip-btn" onclick="flipCard()" id="flip-btn">💡 생각 펼치기</button>
     </div>
   </div>
@@ -349,6 +360,28 @@ const TOPICS = [
     }
   }
       ,
+      e: `<div class="emergency-card">
+  <div class="em-row" style="border-color:#6366f1">
+    <div class="em-trigger" style="color:#818cf8">🔇 침묵</div>
+    <div class="em-action">"30초. 생각나는 것 종이에 써보세요"</div>
+  </div>
+  <div class="em-row" style="border-color:#f59e0b">
+    <div class="em-trigger" style="color:#fbbf24">❌ 틀린 답</div>
+    <div class="em-action">"그게 맞다면 — 1÷3은 뭐지?"</div>
+  </div>
+  <div class="em-row" style="border-color:#10b981">
+    <div class="em-trigger" style="color:#34d399">📢 독점</div>
+    <div class="em-action">"○○가 말한 것에 동의하거나 반대하는 사람?"</div>
+  </div>
+  <div class="em-row" style="border-color:#3b82f6">
+    <div class="em-trigger" style="color:#60a5fa">🔀 이탈</div>
+    <div class="em-action">"처음 질문이 뭐였지?"</div>
+  </div>
+  <div class="em-row" style="border-color:#8b5cf6">
+    <div class="em-trigger" style="color:#a78bfa">🏁 마무리</div>
+    <div class="em-action">"오늘 누군가의 말 하나만 기억한다면?"</div>
+  </div>
+</div>`,
       g: {
         tag: '🍎 수업 가이드',
         body: `<div class="question">수업 지도안 · 토론 시나리오 — 원장님이 그대로 읽거나 화면에 띄워주셔도 충분히 깊이 있는 수업이 가능합니다</div>
@@ -526,6 +559,7 @@ function renderHome() {
         <span class="fmt-badge fmt-a">🏛️ 아고라</span>
         <span class="fmt-badge fmt-m">🔬 미네르바</span>
         <span class="fmt-badge fmt-g">🍎 가이드</span>
+        <span class="fmt-badge" style="background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.25)">🚨 순간</span>
       </div>
     </div>
   `).join('');
@@ -553,8 +587,23 @@ function selectFormat(fmt) {
   currentFormat = fmt;
   isFlipped = false;
 
+  // 교실 순간 — 플립 없이 별도 렌더
+  if (fmt === 'e') {
+    ['h','a','m','g','e'].forEach(f => {
+      const tab = document.getElementById(`tab-${f}`);
+      if (tab) { tab.className = 'fmt-tab'; if (f === 'e') tab.classList.add('active-e'); }
+    });
+    document.getElementById('card-wrap').className = 'card-wrap';
+    document.getElementById('card-inner').classList.remove('flipped');
+    document.getElementById('card-front').innerHTML = currentTopic.cards.e || '';
+    document.getElementById('card-back').innerHTML = '';
+    document.getElementById('flip-area').style.display = 'none';
+    return;
+  }
+  document.getElementById('flip-area').style.display = 'block';
+
   // 탭 활성화
-  ['h','a','m','g'].forEach(f => {
+  ['h','a','m','g','e'].forEach(f => {
     const tab = document.getElementById(`tab-${f}`);
     tab.className = 'fmt-tab';
     if (f === fmt) tab.classList.add(`active-${f}`);
@@ -585,7 +634,8 @@ function tagStyle(fmt) {
     h: 'background:rgba(251,191,36,.2);color:#fbbf24;border:1px solid rgba(251,191,36,.4)',
     a: 'background:rgba(52,211,153,.2);color:#34d399;border:1px solid rgba(52,211,153,.4)',
     m: 'background:rgba(96,165,250,.2);color:#60a5fa;border:1px solid rgba(96,165,250,.4)',
-    g: 'background:rgba(251,113,133,.2);color:#fb7185;border:1px solid rgba(251,113,133,.4)'
+    g: 'background:rgba(251,113,133,.2);color:#fb7185;border:1px solid rgba(251,113,133,.4)',
+    e: 'background:rgba(239,68,68,.2);color:#f87171;border:1px solid rgba(239,68,68,.4)'
   };
   return styles[fmt];
 }
