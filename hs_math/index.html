@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎓 고등 수학의 탑 — 아르모니아</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f0f1a;color:#e2e8f0;font-family:'Nanum Gothic',sans-serif;min-height:100vh}
+
+/* ── 헤더 ── */
+.header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(165,180,252,.2)}
+.header-back{background:rgba(255,255,255,.08);border:none;color:#a5b4fc;font-size:1.1rem;padding:8px 14px;border-radius:10px;cursor:pointer;font-family:inherit}
+.header-back:hover{background:rgba(165,180,252,.2)}
+.header-title{font-family:'Jua',sans-serif;font-size:1.3rem;color:#c4b5fd}
+.header-sub{font-size:.75rem;color:#7c6cd4;margin-top:2px}
+
+/* ── 탭 ── */
+.tab-wrap{background:#13112b;border-bottom:1px solid rgba(165,180,252,.15);padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.tab-wrap::-webkit-scrollbar{display:none}
+.tab-btn{background:none;border:none;color:#7c6cd4;font-family:'Nanum Gothic',sans-serif;font-size:.82rem;font-weight:700;padding:12px 14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-btn.active{color:#a5b4fc;border-bottom-color:#a5b4fc}
+.tab-btn:hover{color:#c4b5fd}
+
+/* ── 단원 그리드 ── */
+#screen-hub{padding:20px 16px}
+.subject-title{font-size:.75rem;color:#7c6cd4;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;padding-left:4px}
+.unit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:24px}
+.unit-btn{background:rgba(165,180,252,.06);border:1px solid rgba(165,180,252,.2);border-radius:14px;padding:16px 12px;cursor:pointer;text-align:center;transition:all .2s;font-family:inherit}
+.unit-btn:hover{background:rgba(165,180,252,.14);border-color:rgba(165,180,252,.5);transform:translateY(-2px)}
+.unit-btn .icon{font-size:1.5rem;margin-bottom:6px}
+.unit-btn .name{font-size:.82rem;color:#e2e8f0;font-weight:700;line-height:1.3}
+.unit-btn .count{font-size:.7rem;color:#7c6cd4;margin-top:4px}
+
+/* ── 카드뷰어 ── */
+#screen-card{display:none;padding:16px}
+.card-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-back{background:rgba(255,255,255,.08);border:none;color:#a5b4fc;font-size:.9rem;padding:8px 14px;border-radius:10px;cursor:pointer;font-family:inherit}
+.card-info{font-size:.8rem;color:#7c6cd4}
+.card-box{background:rgba(30,27,75,.6);border:1px solid rgba(165,180,252,.2);border-radius:18px;padding:20px;margin-bottom:14px;min-height:180px}
+.card-tag{display:inline-block;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:12px;border:1px solid transparent}
+.card-body{font-size:.88rem;line-height:1.8}
+.ans-toggle{width:100%;background:rgba(165,180,252,.1);border:1px solid rgba(165,180,252,.3);border-radius:12px;padding:12px;color:#a5b4fc;font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;margin-bottom:10px;transition:all .2s}
+.ans-toggle:hover{background:rgba(165,180,252,.2)}
+.ans-box{background:rgba(253,230,138,.05);border:1px solid rgba(253,230,138,.2);border-radius:14px;padding:16px;font-size:.85rem;line-height:1.8;display:none}
+.ans-box.show{display:block}
+.card-btns{display:flex;gap:10px;margin-top:14px}
+.card-btns button{flex:1;padding:12px;border-radius:12px;border:none;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-prev{background:rgba(255,255,255,.06);color:#94a3b8}
+.btn-prev:hover{background:rgba(255,255,255,.12)}
+.btn-next{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff}
+.btn-next:hover{filter:brightness(1.1)}
+.progress-bar{background:rgba(255,255,255,.08);border-radius:99px;height:4px;margin-bottom:16px}
+.progress-fill{background:linear-gradient(90deg,#6366f1,#a855f7);height:4px;border-radius:99px;transition:width .3s}
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<div class="header">
+  <a href="https://choisuka.github.io/" class="header-back" style="text-decoration:none">← 수학왕국</a>
+  <div>
+    <div class="header-title">🎓 고등 수학의 탑</div>
+    <div class="header-sub">아르모니아 수학왕국</div>
+  </div>
+</div>
+
+<!-- 탭 -->
+<div class="tab-wrap">
+  <button class="tab-btn active" onclick="setTab(0)">수학(공통)</button>
+  <button class="tab-btn" onclick="setTab(1)">수학 I</button>
+  <button class="tab-btn" onclick="setTab(2)">수학 II</button>
+  <button class="tab-btn" onclick="setTab(3)">확률과 통계</button>
+  <button class="tab-btn" onclick="setTab(4)">기하</button>
+</div>
+
+<!-- 단원 허브 화면 -->
+<div id="screen-hub"></div>
+
+<!-- 카드뷰어 화면 -->
+<div id="screen-card">
+  <div class="card-nav">
+    <button class="card-back" onclick="showHub()">← 단원 목록</button>
+    <span class="card-info" id="card-info"></span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
+  <div class="card-box">
+    <div class="card-tag" id="c-tag"></div>
+    <div class="card-body" id="c-body"></div>
+  </div>
+  <button class="ans-toggle" id="ans-btn" onclick="toggleAns()">💡 풀이 보기</button>
+  <div class="ans-box" id="ans-box"></div>
+  <div class="card-btns">
+    <button class="btn-prev" onclick="move(-1)">◀ 이전</button>
+    <button class="btn-next" onclick="move(1)">다음 ▶</button>
+  </div>
+</div>
+
+<script>
+const TABS = [
+  { name:'수학(공통)', units:[
+    { icon:'📐', name:'다항식', sub:'나머지·인수·이항정리', key:'hs-poly' },
+    { icon:'⚖️', name:'방정식과 부등식', sub:'판별식·근과계수', key:'hs-equation' },
+    { icon:'🔵', name:'도형의 방정식', sub:'직선·원·평행이동', key:'hs-geometry' }
+  ]},
+  { name:'수학 I', units:[
+    { icon:'📈', name:'지수·로그함수', sub:'지수·로그·방정식', key:'hs-exp-log' },
+    { icon:'🌊', name:'삼각함수', sub:'사인·코사인·방정식', key:'hs-trig' },
+    { icon:'🔢', name:'수열', sub:'등차·등비·귀납법', key:'hs-sequence' }
+  ]},
+  { name:'수학 II', units:[
+    { icon:'♾️', name:'극한과 연속', sub:'극한·연속·중간값', key:'hs-limit' },
+    { icon:'📉', name:'미분', sub:'도함수·극값·접선', key:'hs-diff' },
+    { icon:'∫', name:'적분', sub:'부정·정적분·넓이', key:'hs-integral' }
+  ]},
+  { name:'확률과 통계', units:[
+    { icon:'🎲', name:'확률과 통계', sub:'조합·확률·정규분포', key:'hs-prob' }
+  ]},
+  { name:'기하', units:[
+    { icon:'🌀', name:'이차곡선·벡터', sub:'포물선·타원·쌍곡선', key:'hs-conic' }
+  ]}
+];
+
+const CARD_DATA = {/* ── 수학(공통) 1: 다항식 ── */
+'hs-poly': [
+  { tag:'📘 개념 — 다항식 나눗셈', tagColor:'#a5b4fc',
+    bg:'rgba(165,180,252,.07)', bd:'rgba(165,180,252,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#a5b4fc">다항식의 나눗셈 원리</b><br><br>
+정수 나눗셈: 7 ÷ 3 = 2 … 1<br>
+다항식: f(x) = Q(x)·g(x) + R(x)<br><br>
+<b style="color:#fde68a">핵심 공식</b><br>
+f(x) ÷ (x−a) 의 나머지 = f(a) &nbsp;← 나머지 정리<br>
+f(a) = 0 이면 (x−a)는 f(x)의 인수 ← 인수 정리
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 나머지 정리', tagColor:'#a5b4fc',
+    bg:'rgba(165,180,252,.07)', bd:'rgba(165,180,252,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+f(x) = x³ − 3x² + ax + 2를 (x−2)로 나누면 나머지가 6이다. 상수 a를 구하여라.
+</div>`,
+    ans:`<b style="color:#a5b4fc">토로:</b> "나머지 정리를 써볼게!"<br><br>
+나머지 정리: <b>(x−2)로 나눈 나머지 = f(2)</b><br><br>
+f(2) = 8 − 12 + 2a + 2 = 6<br>
+2a − 2 = 6<br>
+<b style="color:#fde68a;font-size:.9rem">a = 4</b><br><br>
+<b style="color:#86efac">토로:</b> "x에 나누는 식의 근(여기서 2)을 대입만 하면 돼. 직접 나눌 필요 없어!"` },
+
+  { tag:'🔢 문제 2 — 인수분해', tagColor:'#a5b4fc',
+    bg:'rgba(165,180,252,.07)', bd:'rgba(165,180,252,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+x³ − 6x² + 11x − 6 을 인수분해하여라.
+</div>`,
+    ans:`<b style="color:#a5b4fc">토로:</b> "상수항 −6의 약수로 근을 먼저 찾아봐!"<br><br>
+f(1) = 1−6+11−6 = 0 ✓ → (x−1)이 인수<br><br>
+조립제법으로 나누면:<br>
+x³−6x²+11x−6 = (x−1)(x²−5x+6)<br>
+= (x−1)(x−2)(x−3)<br><br>
+<b style="color:#fde68a;font-size:.9rem">정답: (x−1)(x−2)(x−3)</b><br><br>
+<b style="color:#86efac">토로:</b> "세 근이 1, 2, 3! 아름답지 않아?"` },
+
+  { tag:'🔢 문제 3 — 항등식', tagColor:'#7dd3fc',
+    bg:'rgba(125,211,252,.07)', bd:'rgba(125,211,252,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+x²+5x+7 = a(x+1)² + b(x+1) + c 가 x에 대한 항등식일 때,<br>a, b, c의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#7dd3fc">방법 1 — 수치 대입법</b><br>
+x=−1: 1−5+7=3 → <b>c=3</b><br>
+x=0: 7 = a+b+3 → a+b=4<br>
+x=1: 13 = 4a+2b+3 → 4a+2b=10 → 2a+b=5<br>
+연립: a=1, b=3<br><br>
+<b style="color:#fde68a;font-size:.9rem">a=1, b=3, c=3</b><br><br>
+<b style="color:#a5b4fc">토로:</b> "항등식은 어떤 x를 넣어도 성립하니까, 편한 수를 골라 대입하면 돼!"` },
+
+  { tag:'💬 하브루타 — 이항정리', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+(x+y)ⁿ = Σ C(n,k)·xⁿ⁻ᵏ·yᵏ<br><br>
+● (2x−1)⁵의 전개식에서 x³의 계수를 구하여라.
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "다 전개해야 하나요? 너무 복잡해요."</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "아니야! x³항만 골라내면 돼."<br><br>
+일반항: C(5,k)·(2x)^(5-k)·(-1)^k<br>
+x³항 → 5−k=3 → k=2<br><br>
+C(5,2)·(2x)³·(−1)² = 10·8x³·1<br>
+<b style="color:#fde68a;font-size:.9rem">x³의 계수 = 80</b><br><br>
+<b style="color:#86efac">토로:</b> "원하는 항만 쏙 뽑아내는 게 이항정리의 진짜 힘이야!"` }
+],
+
+/* ── 수학(공통) 2: 방정식과 부등식 ── */
+'hs-equation': [
+  { tag:'📘 개념 — 이차방정식·복소수', tagColor:'#f9a8d4',
+    bg:'rgba(249,168,212,.07)', bd:'rgba(249,168,212,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#f9a8d4">판별식 D = b²−4ac</b><br>
+D > 0 → 서로 다른 두 실근<br>
+D = 0 → 중근(같은 두 실근)<br>
+D &lt; 0 → 서로 다른 두 허근<br><br>
+<b style="color:#fde68a">근과 계수의 관계</b><br>
+두 근 α, β에 대해:<br>
+α+β = −b/a &nbsp;, &nbsp; αβ = c/a
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 근의 판별', tagColor:'#f9a8d4',
+    bg:'rgba(249,168,212,.07)', bd:'rgba(249,168,212,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+x²−(k+2)x+k+5=0 이 중근을 가지도록 하는 실수 k의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#f9a8d4">토로:</b> "중근 조건은 D=0이야!"<br><br>
+D = (k+2)²−4(k+5) = 0<br>
+k²+4k+4−4k−20 = 0<br>
+k²−16 = 0<br>
+<b style="color:#fde68a;font-size:.9rem">k = 4 또는 k = −4</b><br><br>
+<b style="color:#86efac">토로:</b> "판별식은 근의 개수를 알려주는 X-ray 같은 거야!"` },
+
+  { tag:'🔢 문제 2 — 근과 계수', tagColor:'#f9a8d4',
+    bg:'rgba(249,168,212,.07)', bd:'rgba(249,168,212,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+x²−3x+1=0의 두 근을 α, β라 할 때,<br>
+α²+β², α³+β³ 의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#f9a8d4">토로:</b> "근과 계수 관계로 α+β=3, αβ=1을 먼저 구해!"<br><br>
+α²+β² = (α+β)²−2αβ = 9−2 = <b>7</b><br><br>
+α³+β³ = (α+β)(α²−αβ+β²)<br>
+= (α+β)((α²+β²)−αβ)<br>
+= 3·(7−1) = <b>18</b><br><br>
+<b style="color:#fde68a;font-size:.9rem">α²+β²=7, α³+β³=18</b>` },
+
+  { tag:'🔢 문제 3 — 연립이차방정식', tagColor:'#f9a8d4',
+    bg:'rgba(249,168,212,.07)', bd:'rgba(249,168,252,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+x+y=3, xy=1 을 동시에 만족하는 실수 x, y를 구하여라.
+</div>`,
+    ans:`<b style="color:#f9a8d4">토로:</b> "합과 곱을 알면 이차방정식을 세울 수 있어!"<br><br>
+x, y는 t²−3t+1=0의 두 근<br>
+t = (3±√5)/2<br><br>
+<b style="color:#fde68a;font-size:.9rem">(x,y) = ((3+√5)/2, (3−√5)/2) 또는 반대</b><br><br>
+<b style="color:#86efac">토로:</b> "'합·곱 → 이차방정식' 변환은 고등수학의 핵심 기술이야!"` },
+
+  { tag:'💬 하브루타 — 이차부등식', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● x²−5x+6 &lt; 0 을 만족하는 정수 x는 몇 개인가?
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "그래프를 그려야 하나요, 아니면 수직선을 써야 하나요?"</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "둘 다 같은 말이야. 방법을 알려줄게!"<br><br>
+x²−5x+6 = (x−2)(x−3) &lt; 0<br>
+→ 2 &lt; x &lt; 3<br><br>
+이 범위의 정수: 없음(2와 3 사이에 정수 없음)<br><br>
+<b style="color:#fde68a;font-size:.9rem">정수 해 없음 (0개)</b><br><br>
+<b style="color:#86efac">토로:</b> "이차부등식은 항상 인수분해 → 부호 분석 → 범위 순서야!"` }
+],
+
+/* ── 수학(공통) 3: 도형의 방정식 ── */
+'hs-geometry': [
+  { tag:'📘 개념 — 직선과 원', tagColor:'#34d399',
+    bg:'rgba(52,211,153,.07)', bd:'rgba(52,211,153,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#34d399">점과 직선 사이의 거리</b><br>
+점 (x₀,y₀)에서 ax+by+c=0까지: <br>
+d = |ax₀+by₀+c| / √(a²+b²)<br><br>
+<b style="color:#fde68a">원의 방정식</b><br>
+중심 (a,b), 반지름 r:<br>
+(x−a)²+(y−b)² = r²<br><br>
+<b style="color:#7dd3fc">원과 직선의 관계</b><br>
+중심~직선 거리 d, 반지름 r<br>
+d&lt;r: 두 교점 &nbsp; d=r: 접선 &nbsp; d&gt;r: 만나지 않음
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 직선의 방정식', tagColor:'#34d399',
+    bg:'rgba(52,211,153,.07)', bd:'rgba(52,211,153,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+두 점 A(1,3), B(4,−1)에 대해 선분 AB의 수직이등분선의 방정식을 구하여라.
+</div>`,
+    ans:`<b style="color:#34d399">토로:</b> "수직이등분선은 중점을 지나고, 기울기는 AB의 역수에 부호 반대야!"<br><br>
+AB 중점 M = (5/2, 1)<br>
+AB 기울기 = (−1−3)/(4−1) = −4/3<br>
+수직이등분선 기울기 = 3/4<br><br>
+y−1 = 3/4·(x−5/2)<br>
+4y−4 = 3x−15/2<br>
+<b style="color:#fde68a;font-size:.9rem">6x−8y−7=0</b>` },
+
+  { tag:'🔢 문제 2 — 원의 방정식', tagColor:'#34d399',
+    bg:'rgba(52,211,153,.07)', bd:'rgba(52,211,153,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+x²+y²−4x+6y−3=0을 표준형으로 변환하고<br>중심과 반지름을 구하여라.
+</div>`,
+    ans:`<b style="color:#34d399">토로:</b> "완전제곱식으로 변환하는 거야!"<br><br>
+(x²−4x+4)+(y²+6y+9) = 3+4+9<br>
+(x−2)²+(y+3)² = 16<br><br>
+<b style="color:#fde68a;font-size:.9rem">중심 (2, −3), 반지름 4</b><br><br>
+<b style="color:#86efac">토로:</b> "등호 오른쪽으로 이항한 수만큼 양변에 더해줘야 해!"` },
+
+  { tag:'🔢 문제 3 — 원과 직선', tagColor:'#34d399',
+    bg:'rgba(52,211,153,.07)', bd:'rgba(52,211,153,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+원 x²+y²=10에 점 P(3,1)에서 그은 접선의 방정식을 구하여라.
+</div>`,
+    ans:`<b style="color:#34d399">토로:</b> "점 P가 원 위에 있는지 먼저 확인해봐!"<br><br>
+3²+1²=10 ✓ → P는 원 위의 점<br><br>
+원 위의 점 (x₀,y₀)에서의 접선:<br>
+x₀·x + y₀·y = r²<br>
+3x + y = 10<br><br>
+<b style="color:#fde68a;font-size:.9rem">접선: 3x+y=10</b>` },
+
+  { tag:'💬 하브루타 — 평행이동', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● 원 (x−1)²+(y+2)²=9를 x축 방향으로 3, y축 방향으로 −1 만큼 평행이동한 원의 방정식은?
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "중심을 이동시키면 되는 거 아닌가요?"</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "맞아! 반지름은 그대로고 중심만 이동해!"<br><br>
+원래 중심: (1, −2)<br>
+이동 후 중심: (1+3, −2+(−1)) = (4, −3)<br>
+반지름 3 그대로<br><br>
+<b style="color:#fde68a;font-size:.9rem">(x−4)²+(y+3)²=9</b><br><br>
+<b style="color:#86efac">토로:</b> "y축 방향으로 −1이면 중심의 y좌표는 −1 감소해. 헷갈리지 말자!"` }
+],
+
+/* ── 수학 I: 지수·로그 ── */
+'hs-exp-log': [
+  { tag:'📘 개념 — 지수·로그 핵심', tagColor:'#fb923c',
+    bg:'rgba(251,146,60,.07)', bd:'rgba(251,146,60,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#fb923c">지수법칙</b><br>
+aᵐ·aⁿ=aᵐ⁺ⁿ &nbsp; aᵐ÷aⁿ=aᵐ⁻ⁿ &nbsp; (aᵐ)ⁿ=aᵐⁿ<br><br>
+<b style="color:#fde68a">로그 정의</b><br>
+log_a b = c ⟺ aᶜ=b &nbsp;(a&gt;0, a≠1, b&gt;0)<br><br>
+<b style="color:#86efac">로그 성질</b><br>
+log_a MN = log_a M + log_a N<br>
+log_a (M/N) = log_a M − log_a N<br>
+log_a Mⁿ = n·log_a M
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 지수방정식', tagColor:'#fb923c',
+    bg:'rgba(251,146,60,.07)', bd:'rgba(251,146,60,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+4ˣ − 2ˣ⁺¹ − 8 = 0 을 만족하는 x의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#fb923c">토로:</b> "4ˣ=(2ˣ)² 로 치환해봐!"<br><br>
+2ˣ = t (t&gt;0)로 놓으면<br>
+t²−2t−8=0<br>
+(t−4)(t+2)=0<br>
+t=4 (t&gt;0이므로 t=−2 제외)<br>
+2ˣ=4=2² → <b style="color:#fde68a;font-size:.9rem">x=2</b><br><br>
+<b style="color:#86efac">토로:</b> "지수방정식의 핵심은 '같은 밑으로 통일' 또는 '치환'이야!"` },
+
+  { tag:'🔢 문제 2 — 로그방정식', tagColor:'#fb923c',
+    bg:'rgba(251,146,60,.07)', bd:'rgba(251,146,60,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+log₂(x+1) + log₂(x+3) = 3 을 만족하는 x를 구하여라.
+</div>`,
+    ans:`<b style="color:#fb923c">토로:</b> "로그의 합 = 로그(곱)으로 합쳐봐!"<br><br>
+log₂{(x+1)(x+3)} = 3<br>
+(x+1)(x+3) = 2³ = 8<br>
+x²+4x+3=8<br>
+x²+4x−5=0<br>
+(x+5)(x−1)=0<br>
+x=1 (진수조건: x+1&gt;0, x+3&gt;0 → x&gt;−1이므로 x=−5 제외)<br><br>
+<b style="color:#fde68a;font-size:.9rem">x = 1</b>` },
+
+  { tag:'🔢 문제 3 — 상용로그', tagColor:'#fb923c',
+    bg:'rgba(251,146,60,.07)', bd:'rgba(251,146,60,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+log 2 = 0.3010, log 3 = 0.4771 일 때<br>
+log 0.12 의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#fb923c">토로:</b> "0.12를 2와 3의 곱으로 분해해봐!"<br><br>
+0.12 = 12/100 = 4×3/100 = 2²×3/10²<br><br>
+log 0.12 = 2·log2 + log3 − 2·log10<br>
+= 2(0.3010) + 0.4771 − 2<br>
+= 0.6020 + 0.4771 − 2<br>
+<b style="color:#fde68a;font-size:.9rem">= −0.9209</b>` },
+
+  { tag:'💬 하브루타 — 지수함수 그래프', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● y=2ˣ와 y=2⁻ˣ의 그래프는 어떤 관계인가?<br>두 그래프가 만나는 점은 있는가?
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "y축에 대해 대칭이라고 배웠어요. 그럼 안 만나나요?"</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "y축 대칭이 맞아. 그런데 만나는지 볼게!"<br><br>
+교점: 2ˣ=2⁻ˣ → 2ˣ=1/2ˣ → 2²ˣ=1=2⁰ → x=0<br>
+x=0일 때 y=1<br><br>
+<b style="color:#fde68a;font-size:.9rem">교점: (0, 1)</b><br><br>
+<b style="color:#86efac">토로:</b> "y축 대칭인 두 함수는 y축 위에서 만나! a&gt;0이면 항상 (0,1)에서 만나지."` }
+],
+
+/* ── 수학 I: 삼각함수 ── */
+'hs-trig': [
+  { tag:'📘 개념 — 삼각함수 핵심', tagColor:'#e879f9',
+    bg:'rgba(232,121,249,.07)', bd:'rgba(232,121,249,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#e879f9">호도법</b> &nbsp; 180° = π rad<br><br>
+<b style="color:#fde68a">삼각함수 값 암기</b><br>
+sin30°=½, cos30°=√3/2, tan30°=1/√3<br>
+sin45°=√2/2, cos45°=√2/2, tan45°=1<br>
+sin60°=√3/2, cos60°=½, tan60°=√3<br><br>
+<b style="color:#86efac">피타고라스 항등식</b><br>
+sin²θ+cos²θ=1<br>
+1+tan²θ=sec²θ
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 사인법칙', tagColor:'#e879f9',
+    bg:'rgba(232,121,249,.07)', bd:'rgba(232,121,249,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+삼각형 ABC에서 A=30°, B=45°, a=3이다.<br>
+b의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#e879f9">토로:</b> "사인법칙: a/sinA = b/sinB = 2R을 써봐!"<br><br>
+a/sinA = b/sinB<br>
+3/sin30° = b/sin45°<br>
+3/(1/2) = b/(√2/2)<br>
+6 = 2b/√2<br>
+<b style="color:#fde68a;font-size:.9rem">b = 3√2</b><br><br>
+<b style="color:#86efac">토로:</b> "사인법칙은 '변/대응각의 사인 = 상수'라는 아름다운 비례야!"` },
+
+  { tag:'🔢 문제 2 — 코사인법칙', tagColor:'#e879f9',
+    bg:'rgba(232,121,249,.07)', bd:'rgba(232,121,249,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+삼각형 ABC에서 a=7, b=5, c=3일 때<br>
+가장 큰 각 A의 코사인 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#e879f9">토로:</b> "가장 긴 변의 대각이 가장 커. 코사인법칙을 써봐!"<br><br>
+a²=b²+c²−2bc·cosA<br>
+49=25+9−30·cosA<br>
+30cosA=−15<br>
+<b style="color:#fde68a;font-size:.9rem">cosA = −1/2, 즉 A = 120°</b><br><br>
+<b style="color:#86efac">토로:</b> "cosA가 음수 → A는 둔각! 이 삼각형은 둔각삼각형이야."` },
+
+  { tag:'🔢 문제 3 — 삼각함수 방정식', tagColor:'#e879f9',
+    bg:'rgba(232,121,249,.07)', bd:'rgba(232,121,249,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+0 ≤ θ &lt; 2π 에서 2sin²θ − sinθ − 1 = 0 의 해를 구하여라.
+</div>`,
+    ans:`<b style="color:#e879f9">토로:</b> "sinθ = t로 치환해서 이차방정식으로 만들어봐!"<br><br>
+t = sinθ로 놓으면<br>
+2t²−t−1=0 → (2t+1)(t−1)=0<br>
+t=−1/2 또는 t=1<br><br>
+sinθ=−1/2 → θ=7π/6, 11π/6<br>
+sinθ=1 → θ=π/2<br><br>
+<b style="color:#fde68a;font-size:.9rem">θ = π/2, 7π/6, 11π/6</b>` },
+
+  { tag:'💬 하브루타 — 주기와 진폭', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● y = 3sin(2x − π/3) + 1 의 진폭, 주기, 위상변화를 설명하여라.
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "숫자가 너무 많아서 헷갈려요."</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "y = A·sin(Bx+C)+D 형태로 각 역할을 기억해!"<br><br>
+A=3 → <b>진폭 3</b> (최댓값 4, 최솟값 −2)<br>
+B=2 → <b>주기 = 2π/2 = π</b><br>
+C=−π/3 → x축으로 <b>π/6 만큼 오른쪽 이동</b><br>
+D=1 → <b>y축으로 1 위로 이동</b><br><br>
+<b style="color:#86efac">토로:</b> "진폭은 |A|, 주기는 2π/|B|만 외우면 나머지는 이동이야!"` }
+],
+
+/* ── 수학 I: 수열 ── */
+'hs-sequence': [
+  { tag:'📘 개념 — 수열 핵심', tagColor:'#2dd4bf',
+    bg:'rgba(45,212,191,.07)', bd:'rgba(45,212,191,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#2dd4bf">등차수열</b><br>
+일반항: aₙ = a₁+(n−1)d<br>
+합: Sₙ = n/2·(a₁+aₙ) = n/2·(2a₁+(n−1)d)<br><br>
+<b style="color:#fde68a">등비수열</b><br>
+일반항: aₙ = a₁·rⁿ⁻¹<br>
+합: Sₙ = a₁(rⁿ−1)/(r−1) &nbsp;(r≠1)<br><br>
+<b style="color:#86efac">점화식과 귀납법</b><br>
+aₙ₊₁ = f(aₙ) 형태로 수열을 정의
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 등차수열', tagColor:'#2dd4bf',
+    bg:'rgba(45,212,191,.07)', bd:'rgba(45,212,191,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+등차수열 {aₙ}에서 a₃=11, a₇=27일 때,<br>
+첫째항과 공차, S₁₀을 구하여라.
+</div>`,
+    ans:`<b style="color:#2dd4bf">토로:</b> "항 번호 차이로 공차를 구해봐!"<br><br>
+a₇−a₃ = 4d = 16 → d=4<br>
+a₁ = a₃−2d = 11−8 = 3<br><br>
+S₁₀ = 10/2·(2×3+9×4)<br>
+= 5·(6+36) = 5×42<br>
+<b style="color:#fde68a;font-size:.9rem">a₁=3, d=4, S₁₀=210</b>` },
+
+  { tag:'🔢 문제 2 — 등비수열', tagColor:'#2dd4bf',
+    bg:'rgba(45,212,191,.07)', bd:'rgba(45,212,191,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+등비수열 {aₙ}에서 a₂=6, a₅=48일 때<br>
+a₈의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#2dd4bf">토로:</b> "등비수열은 aₙ₊ₖ/aₙ = rᵏ를 활용해봐!"<br><br>
+a₅/a₂ = r³ = 48/6 = 8 → r=2<br>
+a₂ = a₁·r = 6 → a₁=3<br>
+a₈ = a₁·r⁷ = 3×128<br>
+<b style="color:#fde68a;font-size:.9rem">a₈ = 384</b><br><br>
+<b style="color:#86efac">토로:</b> "r을 먼저 구하면 모든 항을 구할 수 있어!"` },
+
+  { tag:'🔢 문제 3 — 수학적 귀납법', tagColor:'#2dd4bf',
+    bg:'rgba(45,212,191,.07)', bd:'rgba(45,212,191,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+수학적 귀납법으로 다음을 증명하여라.<br>
+1+2+3+…+n = n(n+1)/2
+</div>`,
+    ans:`<b style="color:#2dd4bf">토로:</b> "귀납법 = ①n=1 확인 ②k→k+1 증명"<br><br>
+<b>①</b> n=1: 좌변=1, 우변=1×2/2=1 ✓<br><br>
+<b>②</b> n=k일 때 성립 가정: 1+…+k = k(k+1)/2<br>
+n=k+1일 때:<br>
+1+…+k+(k+1) = k(k+1)/2+(k+1)<br>
+= (k+1)(k/2+1) = (k+1)(k+2)/2 ✓<br><br>
+<b style="color:#fde68a;font-size:.9rem">따라서 모든 자연수 n에서 성립</b>` },
+
+  { tag:'💬 하브루타 — 급수와 수렴', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● 무한등비급수 Σ 3·(1/2)ⁿ⁻¹ (n=1~∞) 이 수렴하는지 판별하고 합을 구하여라.
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "무한히 더하면 당연히 무한대 아닌가요?"</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "항이 점점 작아지면 수렴할 수 있어!"<br><br>
+등비급수 수렴 조건: |r| &lt; 1<br>
+여기서 r = 1/2, |1/2| &lt; 1 → <b>수렴</b><br><br>
+무한등비급수 합 = a/(1−r)<br>
+= 3/(1−1/2) = 3/(1/2)<br>
+<b style="color:#fde68a;font-size:.9rem">= 6</b><br><br>
+<b style="color:#86efac">토로:</b> "3 + 1.5 + 0.75 + 0.375 + … 더하면 6에 가까워져. 신기하지?"` }
+],
+
+/* ── 수학 II: 함수의 극한과 연속 ── */
+'hs-limit': [
+  { tag:'📘 개념 — 극한과 연속', tagColor:'#60a5fa',
+    bg:'rgba(96,165,250,.07)', bd:'rgba(96,165,250,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#60a5fa">극한의 정의</b><br>
+lim_{x→a} f(x) = L<br>
+x가 a에 한없이 가까워질 때 f(x)→L<br><br>
+<b style="color:#fde68a">연속의 조건 (3가지)</b><br>
+① f(a) 가 정의됨<br>
+② lim_{x→a} f(x) 가 존재<br>
+③ lim_{x→a} f(x) = f(a)<br><br>
+<b style="color:#86efac">중요 극한</b><br>
+lim_{x→0} sinx/x = 1<br>
+lim_{x→∞} (1+1/x)ˣ = e
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 극한 계산', tagColor:'#60a5fa',
+    bg:'rgba(96,165,250,.07)', bd:'rgba(96,165,250,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+lim_{x→2} (x²−4)/(x−2) 를 구하여라.
+</div>`,
+    ans:`<b style="color:#60a5fa">토로:</b> "분모가 0이 되면 인수분해로 약분해봐!"<br><br>
+x²−4 = (x+2)(x−2)<br>
+lim_{x→2} (x+2)(x−2)/(x−2)<br>
+= lim_{x→2} (x+2)<br>
+= 2+2<br>
+<b style="color:#fde68a;font-size:.9rem">= 4</b><br><br>
+<b style="color:#86efac">토로:</b> "x=2를 바로 넣으면 0/0이 나오지만, 인수분해 후엔 넣을 수 있어!"` },
+
+  { tag:'🔢 문제 2 — 연속 판별', tagColor:'#60a5fa',
+    bg:'rgba(96,165,250,.07)', bd:'rgba(96,165,250,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+f(x) = { x²+1 (x≠1), 3 (x=1) } 은 x=1에서 연속인가?
+</div>`,
+    ans:`<b style="color:#60a5fa">토로:</b> "연속 3조건을 하나씩 체크해봐!"<br><br>
+① f(1) = 3 ✓ (정의됨)<br>
+② lim_{x→1} (x²+1) = 1+1 = 2 ✓ (극한 존재)<br>
+③ f(1)=3 ≠ 2=극한값 ✗<br><br>
+<b style="color:#fde68a;font-size:.9rem">x=1에서 불연속</b><br><br>
+<b style="color:#86efac">토로:</b> "③번 조건이 핵심이야. 함수값과 극한값이 같아야 연속이거든!"` },
+
+  { tag:'🔢 문제 3 — 무한대 극한', tagColor:'#60a5fa',
+    bg:'rgba(96,165,250,.07)', bd:'rgba(96,165,250,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+lim_{x→∞} (3x²−2x+1)/(2x²+5x−3) 을 구하여라.
+</div>`,
+    ans:`<b style="color:#60a5fa">토로:</b> "∞/∞ 꼴은 최고차항으로 나눠봐!"<br><br>
+분자·분모를 x²으로 나누면:<br>
+(3−2/x+1/x²) / (2+5/x−3/x²)<br>
+x→∞이면 1/x→0, 1/x²→0<br>
+= 3/2<br><br>
+<b style="color:#fde68a;font-size:.9rem">= 3/2</b><br><br>
+<b style="color:#86efac">토로:</b> "분자·분모의 최고차 계수의 비가 답이야. 차수가 같을 때!"` },
+
+  { tag:'💬 하브루타 — 중간값 정리', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● f(x) = x³−x−1 은 구간 [1,2]에서 반드시 실근을 가지는가?
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "직접 풀지 않고도 알 수 있나요?"</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "중간값 정리로 '존재'를 증명할 수 있어!"<br><br>
+f(1)=1−1−1=−1 &lt; 0<br>
+f(2)=8−2−1=5 &gt; 0<br><br>
+f는 연속, f(1)&lt;0&lt;f(2)<br>
+→ 중간값 정리에 의해 f(c)=0인 c∈(1,2) 존재<br><br>
+<b style="color:#fde68a;font-size:.9rem">∴ [1,2]에서 실근이 존재한다.</b><br><br>
+<b style="color:#86efac">토로:</b> "부호가 바뀌면 반드시 중간에 0을 지나쳐야 해. 직관적이지?"` }
+],
+
+/* ── 수학 II: 미분 ── */
+'hs-diff': [
+  { tag:'📘 개념 — 미분 핵심', tagColor:'#f472b6',
+    bg:'rgba(244,114,182,.07)', bd:'rgba(244,114,182,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#f472b6">미분계수</b><br>
+f'(a) = lim_{h→0} {f(a+h)−f(a)}/h<br><br>
+<b style="color:#fde68a">기본 미분 공식</b><br>
+(xⁿ)' = nxⁿ⁻¹<br>
+(sinx)' = cosx &nbsp; (cosx)' = −sinx<br>
+(eˣ)' = eˣ &nbsp; (lnx)' = 1/x<br><br>
+<b style="color:#86efac">활용</b><br>
+증가/감소: f'(x)&gt;0 증가, f'(x)&lt;0 감소<br>
+극대/극소: f'=0이고 부호 변화
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 미분 기본', tagColor:'#f472b6',
+    bg:'rgba(244,114,182,.07)', bd:'rgba(244,114,182,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+f(x) = 2x³ − 3x² + 5x − 1 의 f'(x)를 구하고<br>
+f'(1)의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#f472b6">토로:</b> "각 항을 미분해봐!"<br><br>
+f'(x) = 6x²−6x+5<br><br>
+f'(1) = 6−6+5<br>
+<b style="color:#fde68a;font-size:.9rem">f'(1) = 5</b><br><br>
+<b style="color:#86efac">토로:</b> "f'(1)=5는 x=1에서의 순간변화율, 즉 접선의 기울기야!"` },
+
+  { tag:'🔢 문제 2 — 극대·극소', tagColor:'#f472b6',
+    bg:'rgba(244,114,182,.07)', bd:'rgba(244,114,182,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+f(x) = x³ − 3x + 2 의 극대·극소를 구하여라.
+</div>`,
+    ans:`<b style="color:#f472b6">토로:</b> "f'=0인 점에서 부호 변화를 확인해봐!"<br><br>
+f'(x) = 3x²−3 = 3(x+1)(x−1) = 0<br>
+x = −1 또는 x = 1<br><br>
+부호표: x&lt;−1(+), −1&lt;x&lt;1(−), x&gt;1(+)<br><br>
+x=−1: f'가 +→− → <b>극대 f(−1)=4</b><br>
+x=1: f'가 −→+ → <b>극소 f(1)=0</b><br><br>
+<b style="color:#fde68a;font-size:.9rem">극대(−1, 4), 극소(1, 0)</b>` },
+
+  { tag:'🔢 문제 3 — 접선의 방정식', tagColor:'#f472b6',
+    bg:'rgba(244,114,182,.07)', bd:'rgba(244,114,182,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+곡선 y = x² + 3x 위의 점 (1, 4)에서의 접선의 방정식을 구하여라.
+</div>`,
+    ans:`<b style="color:#f472b6">토로:</b> "접선 기울기 = 그 점에서의 미분계수야!"<br><br>
+y' = 2x+3<br>
+x=1일 때 기울기 = 2+3 = 5<br><br>
+점 (1,4)를 지나고 기울기 5인 직선:<br>
+y−4 = 5(x−1)<br>
+<b style="color:#fde68a;font-size:.9rem">y = 5x−1</b>` },
+
+  { tag:'💬 하브루타 — 롤의 정리', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● f(x)=x²−4x+3 에서 f(1)=f(3)=0이다.<br>
+f'(c)=0이 되는 c∈(1,3)이 존재하는가?
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "그냥 직접 미분해서 0 되는 x 찾으면 되지 않나요?"</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "맞아! 근데 그게 롤의 정리가 보장하는 거야."<br><br>
+f'(x)=2x−4=0 → x=2<br>
+c=2∈(1,3) ✓<br><br>
+<b style="color:#fde68a;font-size:.9rem">c=2에서 f'(c)=0</b><br><br>
+<b style="color:#86efac">롤의 정리:</b> f가 [a,b]에서 연속, (a,b)에서 미분가능, f(a)=f(b)이면 f'(c)=0인 c가 반드시 존재해.<br><br>
+<b style="color:#a5b4fc">토로:</b> "산을 오르고 다시 내려오면 기울기가 0인 정상이 있다는 뜻이야!"` }
+],
+
+/* ── 수학 II: 적분 ── */
+'hs-integral': [
+  { tag:'📘 개념 — 적분 핵심', tagColor:'#4ade80',
+    bg:'rgba(74,222,128,.07)', bd:'rgba(74,222,128,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#4ade80">부정적분</b><br>
+∫xⁿdx = xⁿ⁺¹/(n+1) + C &nbsp;(n≠−1)<br>
+∫sinx dx = −cosx+C<br>
+∫eˣdx = eˣ+C<br><br>
+<b style="color:#fde68a">정적분</b><br>
+∫_a^b f(x)dx = [F(x)]_a^b = F(b)−F(a)<br><br>
+<b style="color:#86efac">넓이 (부호 주의!)</b><br>
+곡선과 x축 사이의 넓이 = ∫|f(x)|dx
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 부정적분', tagColor:'#4ade80',
+    bg:'rgba(74,222,128,.07)', bd:'rgba(74,222,128,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+∫(3x²−4x+1)dx 를 구하여라.
+</div>`,
+    ans:`<b style="color:#4ade80">토로:</b> "항마다 적분해봐!"<br><br>
+= 3·x³/3 − 4·x²/2 + x + C<br>
+= x³ − 2x² + x + C<br><br>
+<b style="color:#fde68a;font-size:.9rem">x³ − 2x² + x + C</b><br><br>
+<b style="color:#86efac">토로:</b> "미분하면 원래 함수가 나오는지 체크해봐. 검산 방법이야!"` },
+
+  { tag:'🔢 문제 2 — 정적분', tagColor:'#4ade80',
+    bg:'rgba(74,222,128,.07)', bd:'rgba(74,222,128,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+∫_1^3 (2x+1)dx 의 값을 구하여라.
+</div>`,
+    ans:`<b style="color:#4ade80">토로:</b> "먼저 부정적분하고, 위끝-아래끝을 대입해봐!"<br><br>
+F(x) = x²+x<br>
+[x²+x]_1^3 = (9+3)−(1+1)<br>
+= 12−2<br>
+<b style="color:#fde68a;font-size:.9rem">= 10</b><br><br>
+<b style="color:#86efac">토로:</b> "정적분은 '넓이의 합'이야. 여기선 직선 아래 사다리꼴 2개!"` },
+
+  { tag:'🔢 문제 3 — 넓이', tagColor:'#4ade80',
+    bg:'rgba(74,222,128,.07)', bd:'rgba(74,222,128,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+곡선 y=x²−4 와 x축으로 둘러싸인 도형의 넓이를 구하여라.
+</div>`,
+    ans:`<b style="color:#4ade80">토로:</b> "먼저 x축과의 교점을 찾아봐!"<br><br>
+x²−4=0 → x=±2<br>
+−2&lt;x&lt;2에서 y&lt;0 → 절댓값 필요<br><br>
+넓이 = ∫_{-2}^{2} |x²−4|dx<br>
+= ∫_{-2}^{2} (4−x²)dx<br>
+= [4x−x³/3]_{-2}^{2}<br>
+= (8−8/3)−(−8+8/3)<br>
+<b style="color:#fde68a;font-size:.9rem">= 32/3</b>` },
+
+  { tag:'💬 하브루타 — 적분과 미분의 관계', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● F(x) = ∫_0^x (t²+1)dt 라 할 때, F'(x)를 구하여라.
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "직접 적분하고 미분해야 하나요? 복잡해 보여요."</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "미적분의 기본정리를 쓰면 초간단이야!"<br><br>
+미적분의 기본정리:<br>
+F(x) = ∫_a^x f(t)dt → F'(x) = f(x)<br><br>
+따라서 F'(x) = x²+1<br><br>
+<b style="color:#fde68a;font-size:.9rem">F'(x) = x²+1</b><br><br>
+<b style="color:#86efac">토로:</b> "미분과 적분은 서로 역연산이야. 이게 뉴턴과 라이프니츠의 가장 위대한 발견!"` }
+],
+
+/* ── 확률과 통계 ── */
+'hs-prob': [
+  { tag:'📘 개념 — 경우의 수·확률', tagColor:'#fbbf24',
+    bg:'rgba(251,191,36,.07)', bd:'rgba(251,191,36,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#fbbf24">순열·조합</b><br>
+P(n,r) = n!/(n−r)! &nbsp;(순서 있음)<br>
+C(n,r) = n!/(r!(n−r)!) &nbsp;(순서 없음)<br><br>
+<b style="color:#fde68a">확률</b><br>
+P(A) = n(A)/n(S)<br>
+P(A∪B) = P(A)+P(B)−P(A∩B)<br><br>
+<b style="color:#86efac">조건부확률</b><br>
+P(B|A) = P(A∩B)/P(A)
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 조합', tagColor:'#fbbf24',
+    bg:'rgba(251,191,36,.07)', bd:'rgba(251,191,36,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+10명 중 대표 3명을 뽑는 경우의 수는?<br>
+그 중 특정 1명 A가 반드시 포함되는 경우의 수는?
+</div>`,
+    ans:`<b style="color:#fbbf24">토로:</b> "순서 없이 뽑으니까 조합이야!"<br><br>
+전체: C(10,3) = 120<br><br>
+A 포함 조건: 나머지 9명 중 2명 선택<br>
+C(9,2) = 36<br><br>
+<b style="color:#fde68a;font-size:.9rem">전체 120가지, A 포함 36가지</b><br><br>
+<b style="color:#86efac">토로:</b> "조건이 있으면 그 조건을 먼저 고정하고 나머지를 계산해!"` },
+
+  { tag:'🔢 문제 2 — 확률', tagColor:'#fbbf24',
+    bg:'rgba(251,191,36,.07)', bd:'rgba(251,191,36,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+주사위 2개를 던져 나온 눈의 합이 8 이상인 확률은?
+</div>`,
+    ans:`<b style="color:#fbbf24">토로:</b> "전체 경우의 수 = 6×6 = 36"<br><br>
+합이 8 이상인 경우:<br>
+합=8: (2,6)(3,5)(4,4)(5,3)(6,2) → 5가지<br>
+합=9: (3,6)(4,5)(5,4)(6,3) → 4가지<br>
+합=10: (4,6)(5,5)(6,4) → 3가지<br>
+합=11: (5,6)(6,5) → 2가지<br>
+합=12: (6,6) → 1가지<br><br>
+<b style="color:#fde68a;font-size:.9rem">P = 15/36 = 5/12</b>` },
+
+  { tag:'🔢 문제 3 — 정규분포', tagColor:'#fbbf24',
+    bg:'rgba(251,191,36,.07)', bd:'rgba(251,191,36,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+어떤 시험 점수가 정규분포 N(70, 10²)을 따를 때,<br>
+80점 이상인 학생의 비율을 구하여라.<br>
+(단, P(0≤Z≤1)=0.3413)
+</div>`,
+    ans:`<b style="color:#fbbf24">토로:</b> "표준화 공식 Z=(X−μ)/σ를 써봐!"<br><br>
+Z = (80−70)/10 = 1<br><br>
+P(X≥80) = P(Z≥1)<br>
+= 0.5 − P(0≤Z≤1)<br>
+= 0.5 − 0.3413<br>
+<b style="color:#fde68a;font-size:.9rem">= 0.1587 (약 15.87%)</b><br><br>
+<b style="color:#86efac">토로:</b> "정규분포 문제는 항상 표준화 → 표 찾기 순서야!"` },
+
+  { tag:'💬 하브루타 — 이항분포', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● 동전을 10번 던져 앞면이 정확히 3번 나올 확률은?<br>
+이항분포 B(10, 1/2)의 평균과 분산은?
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "10번 중 3번이니까 3/10 아닌가요?"</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "아니야! '정확히 3번'은 이항분포로 구해야 해."<br><br>
+P(X=3) = C(10,3)·(1/2)³·(1/2)⁷<br>
+= 120 × (1/2)¹⁰<br>
+= 120/1024 ≈ 0.117<br><br>
+이항분포 B(n,p): 평균=np, 분산=np(1-p)<br>
+평균=10×1/2=<b>5</b>, 분산=10×1/2×1/2=<b>2.5</b><br><br>
+<b style="color:#86efac">토로:</b> "3/10이 아닌 이유: 다른 7번이 뒷면이어야 한다는 조건도 포함해야 해!"` }
+],
+
+/* ── 기하: 이차곡선 ── */
+'hs-conic': [
+  { tag:'📘 개념 — 이차곡선', tagColor:'#a78bfa',
+    bg:'rgba(167,139,250,.07)', bd:'rgba(167,139,250,.3)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.9">
+<b style="color:#a78bfa">포물선</b> y²=4px (초점 (p,0), 준선 x=−p)<br><br>
+<b style="color:#fde68a">타원</b> x²/a²+y²/b²=1 (a&gt;b&gt;0)<br>
+초점 (±c,0), c²=a²−b²<br>
+장축 길이 2a<br><br>
+<b style="color:#f87171">쌍곡선</b> x²/a²−y²/b²=1<br>
+초점 (±c,0), c²=a²+b²<br>
+점근선 y=±(b/a)x
+</div>`,
+    ans: null },
+
+  { tag:'🔢 문제 1 — 포물선', tagColor:'#a78bfa',
+    bg:'rgba(167,139,250,.07)', bd:'rgba(167,139,250,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+포물선 y²=8x의 초점의 좌표와 준선의 방정식을 구하여라.
+</div>`,
+    ans:`<b style="color:#a78bfa">토로:</b> "y²=4px 형태야. 4p=8이니까 p=2!"<br><br>
+초점: (p, 0) = <b>(2, 0)</b><br>
+준선: x = −p = <b>x = −2</b><br><br>
+<b style="color:#86efac">토로:</b> "포물선은 '초점까지 거리 = 준선까지 거리'인 점들의 집합이야. 이 정의를 기억해!"` },
+
+  { tag:'🔢 문제 2 — 타원', tagColor:'#a78bfa',
+    bg:'rgba(167,139,250,.07)', bd:'rgba(167,139,250,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+타원 x²/25+y²/9=1 의 장축의 길이, 초점의 좌표를 구하여라.
+</div>`,
+    ans:`<b style="color:#a78bfa">토로:</b> "a²=25, b²=9이므로 a=5, b=3!"<br><br>
+장축 길이 = 2a = <b>10</b><br>
+c² = 25−9 = 16 → c = 4<br>
+초점: <b>(±4, 0)</b><br><br>
+<b style="color:#fde68a;font-size:.9rem">장축 10, 초점 (4,0), (−4,0)</b><br><br>
+<b style="color:#86efac">토로:</b> "타원은 두 초점까지의 거리의 합이 일정한(=2a) 점들의 집합이야!"` },
+
+  { tag:'🔢 문제 3 — 쌍곡선', tagColor:'#a78bfa',
+    bg:'rgba(167,139,250,.07)', bd:'rgba(167,139,250,.25)',
+    body:`<div style="font-size:.88rem;color:#e2e8f0;line-height:1.8;font-weight:600">
+쌍곡선 x²/4−y²/5=1 의 점근선의 방정식을 구하여라.
+</div>`,
+    ans:`<b style="color:#a78bfa">토로:</b> "점근선은 y=±(b/a)x야!"<br><br>
+a²=4 → a=2<br>
+b²=5 → b=√5<br>
+점근선: y = ±(√5/2)x<br><br>
+<b style="color:#fde68a;font-size:.9rem">y = (√5/2)x, y = −(√5/2)x</b><br><br>
+<b style="color:#86efac">토로:</b> "쌍곡선은 점근선에 한없이 가까워지지만 절대 닿지 않는 곡선이야!"` },
+
+  { tag:'💬 하브루타 — 벡터', tagColor:'#fde68a',
+    bg:'rgba(253,230,138,.07)', bd:'rgba(253,230,138,.25)',
+    body:`<div style="font-size:.84rem;color:#e2e8f0;line-height:1.8;font-weight:600;margin-bottom:8px">
+● 벡터 a⃗=(3,1), b⃗=(1,2)에 대해<br>a⃗·b⃗(내적)와 두 벡터가 이루는 각 θ를 구하여라.
+</div>
+<div style="font-size:.72rem;color:#aaa;font-style:italic">학생: "벡터의 곱이 숫자가 나오는 게 이상해요."</div>`,
+    ans:`<b style="color:#fde68a">토로:</b> "내적은 두 벡터의 '협력도'야!"<br><br>
+a⃗·b⃗ = 3×1+1×2 = <b>5</b><br><br>
+|a⃗|=√10, |b⃗|=√5<br>
+cosθ = 5/(√10·√5) = 5/√50 = 5/(5√2) = 1/√2<br><br>
+<b style="color:#fde68a;font-size:.9rem">θ = 45°</b><br><br>
+<b style="color:#86efac">토로:</b> "내적이 0이면 수직! 내적은 두 벡터가 얼마나 같은 방향인지 알려줘."` }
+]
+};
+
+let curTab = 0, curKey = '', curIdx = 0, showAns = false;
+
+function setTab(i) {
+  curTab = i;
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  renderHub();
+}
+
+function renderHub() {
+  const tab = TABS[curTab];
+  let html = '';
+  html += `<p class="subject-title">${tab.name}</p>`;
+  html += '<div class="unit-grid">';
+  tab.units.forEach(u => {
+    const cnt = (CARD_DATA[u.key]||[]).length;
+    html += `<div class="unit-btn" onclick="startCards('${u.key}')">
+      <div class="icon">${u.icon}</div>
+      <div class="name">${u.name}</div>
+      <div class="count">${u.sub}</div>
+      <div class="count" style="margin-top:6px;color:#6366f1">${cnt}장</div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('screen-hub').innerHTML = html;
+  document.getElementById('screen-hub').style.display='block';
+  document.getElementById('screen-card').style.display='none';
+}
+
+function startCards(key) {
+  curKey = key; curIdx = 0; showAns = false;
+  document.getElementById('screen-hub').style.display='none';
+  document.getElementById('screen-card').style.display='block';
+  renderCard();
+}
+
+function renderCard() {
+  const cards = CARD_DATA[curKey]||[];
+  const c = cards[curIdx];
+  if(!c) return;
+  const total = cards.length;
+  document.getElementById('card-info').textContent = `${curIdx+1} / ${total}`;
+  document.getElementById('prog').style.width = ((curIdx+1)/total*100)+'%';
+  const tag = document.getElementById('c-tag');
+  tag.textContent = c.tag;
+  tag.style.background = (c.bg||'rgba(165,180,252,.1)');
+  tag.style.color = (c.tagColor||'#a5b4fc');
+  tag.style.borderColor = (c.bd||'rgba(165,180,252,.3)');
+  document.getElementById('c-body').innerHTML = c.body;
+  showAns = false;
+  const ansBox = document.getElementById('ans-box');
+  const ansBtn = document.getElementById('ans-btn');
+  ansBox.classList.remove('show');
+  if(c.ans) {
+    ansBtn.style.display='block';
+    ansBtn.textContent='💡 풀이 보기';
+    ansBox.innerHTML = c.ans;
+  } else {
+    ansBtn.style.display='none';
+  }
+}
+
+function toggleAns() {
+  showAns = !showAns;
+  document.getElementById('ans-box').classList.toggle('show', showAns);
+  document.getElementById('ans-btn').textContent = showAns ? '🙈 풀이 닫기' : '💡 풀이 보기';
+}
+
+function move(d) {
+  const cards = CARD_DATA[curKey]||[];
+  curIdx = Math.max(0, Math.min(cards.length-1, curIdx+d));
+  showAns = false;
+  renderCard();
+}
+
+function showHub() {
+  document.getElementById('screen-hub').style.display='block';
+  document.getElementById('screen-card').style.display='none';
+}
+
+function goHub() {
+  location.href = '../armoonia_hub/index.html';
+}
+
+renderHub();
+</script>
+</body>
+</html>

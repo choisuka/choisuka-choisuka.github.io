@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>아이콘 생성기</title>
+<style>
+  body { background:#0a0a1a; color:#fff; font-family:sans-serif; display:flex; flex-direction:column; align-items:center; padding:40px; gap:24px; }
+  canvas { border-radius:24px; box-shadow:0 0 40px #a855f7aa; }
+  button { background:#a855f7; color:#fff; border:none; padding:12px 32px; border-radius:12px; font-size:16px; cursor:pointer; margin:4px; }
+  button:hover { background:#9333ea; }
+  h2 { margin:0; color:#a855f7; }
+</style>
+</head>
+<body>
+<h2>아르모니아 아이콘 생성기</h2>
+<canvas id="c" width="512" height="512"></canvas>
+<div>
+  <button onclick="download(512)">⬇ icon-512.png 저장</button>
+  <button onclick="download(192)">⬇ icon-192.png 저장</button>
+</div>
+<p style="color:#888;font-size:13px">저장 후 <code>armoonia_hub/icons/</code> 폴더에 넣으세요</p>
+
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+
+function draw(size) {
+  const s = size;
+  // 배경 그라디언트
+  const bg = ctx.createLinearGradient(0, 0, s, s);
+  bg.addColorStop(0, '#0f0a2a');
+  bg.addColorStop(1, '#1a0a3a');
+  ctx.fillStyle = bg;
+  ctx.beginPath();
+  roundRect(ctx, 0, 0, s, s, s * 0.2);
+  ctx.fill();
+
+  // 별 몇 개
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  const stars = [[0.15,0.15],[0.82,0.2],[0.1,0.75],[0.88,0.8],[0.5,0.08],[0.6,0.9]];
+  stars.forEach(([x,y]) => {
+    ctx.beginPath();
+    ctx.arc(x*s, y*s, s*0.01, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // 보라 원 글로우
+  const glow = ctx.createRadialGradient(s/2, s/2, 0, s/2, s/2, s*0.4);
+  glow.addColorStop(0, 'rgba(168,85,247,0.35)');
+  glow.addColorStop(1, 'rgba(168,85,247,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, s, s);
+
+  // 이모지 공룡
+  ctx.font = `${s * 0.42}px serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('🦕', s/2, s * 0.46);
+
+  // 앱 이름
+  ctx.font = `bold ${s * 0.09}px "Apple SD Gothic Neo", sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  const grad = ctx.createLinearGradient(s*0.2, 0, s*0.8, 0);
+  grad.addColorStop(0, '#a855f7');
+  grad.addColorStop(0.5, '#818cf8');
+  grad.addColorStop(1, '#a855f7');
+  ctx.fillStyle = grad;
+  ctx.fillText('아르모니아', s/2, s * 0.72);
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function download(size) {
+  const tmp = document.createElement('canvas');
+  tmp.width = size; tmp.height = size;
+  const tCtx = tmp.getContext('2d');
+
+  // swap context temporarily
+  const origCtx = c.getContext('2d');
+  // draw on tmp
+  const saved = { c, ctx };
+
+  // redraw on tmp canvas
+  const _c = tmp;
+  const _ctx = tCtx;
+  const s = size;
+
+  const bg = _ctx.createLinearGradient(0, 0, s, s);
+  bg.addColorStop(0, '#0f0a2a');
+  bg.addColorStop(1, '#1a0a3a');
+  _ctx.fillStyle = bg;
+  _ctx.beginPath();
+  _ctx.moveTo(s*0.2, 0);
+  _ctx.lineTo(s*0.8, 0);
+  _ctx.quadraticCurveTo(s, 0, s, s*0.2);
+  _ctx.lineTo(s, s*0.8);
+  _ctx.quadraticCurveTo(s, s, s*0.8, s);
+  _ctx.lineTo(s*0.2, s);
+  _ctx.quadraticCurveTo(0, s, 0, s*0.8);
+  _ctx.lineTo(0, s*0.2);
+  _ctx.quadraticCurveTo(0, 0, s*0.2, 0);
+  _ctx.closePath();
+  _ctx.fill();
+
+  const glow = _ctx.createRadialGradient(s/2, s/2, 0, s/2, s/2, s*0.4);
+  glow.addColorStop(0, 'rgba(168,85,247,0.35)');
+  glow.addColorStop(1, 'rgba(168,85,247,0)');
+  _ctx.fillStyle = glow;
+  _ctx.fillRect(0, 0, s, s);
+
+  _ctx.font = `${s * 0.42}px serif`;
+  _ctx.textAlign = 'center';
+  _ctx.textBaseline = 'middle';
+  _ctx.fillText('🦕', s/2, s * 0.46);
+
+  _ctx.font = `bold ${s * 0.09}px sans-serif`;
+  _ctx.textAlign = 'center';
+  _ctx.textBaseline = 'top';
+  const gr = _ctx.createLinearGradient(s*0.2, 0, s*0.8, 0);
+  gr.addColorStop(0, '#a855f7');
+  gr.addColorStop(0.5, '#818cf8');
+  gr.addColorStop(1, '#a855f7');
+  _ctx.fillStyle = gr;
+  _ctx.fillText('아르모니아', s/2, s * 0.72);
+
+  const a = document.createElement('a');
+  a.download = `icon-${size}.png`;
+  a.href = tmp.toDataURL('image/png');
+  a.click();
+}
+
+// draw preview at 512
+draw(512);
+</script>
+</body>
+</html>
